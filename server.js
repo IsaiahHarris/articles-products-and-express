@@ -1,27 +1,29 @@
 const express = require('express');
 const app = express();
-const products = require('./db/products');
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const router = express.Router();
+const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser')
+const articlesRoute = require('./routes/articles');
 const PORT = process.env.PORT || 8080;
 
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
-app.get('/', (req, res)=>{
-  res.send('smoke');
+app.get('/', (req, res, next)=>{
+  res.send('you got'+ articlesRoute.all());
 })
 
-app.use('/products', products);
+app.engine('.hbs',exphbs({
+  defaultLayout: 'main',
+  extname: '.hbs'
+}));
 
-app.get('*', (req, res)=>{
-  console.log('WRECKED');
-})
+app.set('view engine', '.hbs');
 
-app.use((err, req, res, next)=>{
-  console.log(err);
-  res.status(500).send('error');
-})
 
-app.listen(PORT,()=>{
-  console.log('listening to port ' + PORT)
+
+app.use('/articles', articlesRoute)
+
+app.listen(PORT, ()=>{
+console.log('server listening to', PORT)
 })
