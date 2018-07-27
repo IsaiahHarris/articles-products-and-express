@@ -23,6 +23,7 @@
   "homepage": "https://github.com/IsaiahHarris/articles-products-and-express#readme",
   "dependencies": {
     "express": "^4.16.3",
-    "express-handlebars": "^3.0.0"
+    "express-handlebars": "^3.0.0",
+    "method-override": "^3.0.0"
   }
 }

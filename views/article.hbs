@@ -3,3 +3,13 @@
 <h2>{{article.author}}</h2>
 <h2>{{article.body}}</h2>
 <h2>{{article.urlTitle}}</h2>
+
+<form action="/articles/edit" method="POST" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name = "_method" value="PUT">
+<input type="submit" value="edit item">
+</form>
+
+<form action='/articles/{{article.title}}' method="POST" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name = "_method" value="DELETE">
+<input type="submit" value="delete item">
+</form>

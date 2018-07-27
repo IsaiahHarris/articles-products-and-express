@@ -2,9 +2,13 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser')
 const articlesData = require('../db/articlesDb');
+const methodOverride = require('method-override');
+
+
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
+
 
 router.get('/', (req, res, next) => {
   res.render('home', {
@@ -54,17 +58,16 @@ router.delete(`/:title`, (req, res) => {
     }
   })
   if (deleted === false) {
-    res.render(`new`);
+    res.redirect(`/articles/new`);
   } else {
-    res.render('index',{
-      article: articlesData.all()
-    });
+    res.redirect('/articles')
   }
 })
 /////////////
 
 
 /////////////
+
 
 router.get('/', (req, res) => {
   res.render('index', {
@@ -87,10 +90,10 @@ router.get('/:title', (req, res) => {
     }
   })
 })
-
 router.get('/:title/edit', (req, res) => {
   res.render('edit');
 })
+
 
 
 module.exports = router;

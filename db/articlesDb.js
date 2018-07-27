@@ -1,4 +1,4 @@
-const articleCollection = [{author: 'bob', body: 'ksbdaldjh', title:'bob title'}];
+const articleCollection = [{author: 'bob', body: 'ksbdaldjh', title:'bobtitle'}];
 
 function all(){
   return articleCollection;
