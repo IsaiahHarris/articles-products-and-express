@@ -44,19 +44,20 @@ router.put('/:title', (req, res, next) => {
     res.redirect(303, `/articles/${title}`)
   }
 })
-
+let deleted = false;
 router.delete(`/:title`, (req, res) => {
   let title = req.params.title;
-  for (let i = 0; i < articlesData.all().length; i++) {
-    if (title === articlesData.all()[i].title) {
-      articlesData.remove(i);
-      res.render('home', {
-        showArticles: true,
-        articles: articlesData.all()
-      })
+  articlesData.all().map(element=>{
+    if(element.title === title){
+      articlesData.remove(element)
+      deleted = true;
     }
+  })
+  if(deleted === false){
+    res.render('new')
+  }else {
+    res.redirect('index')
   }
-  res.redirect('/articles');
 })
 /////////////
 
@@ -84,7 +85,6 @@ router.get('/:title', (req, res) => {
     }
   })
 })
-
 
 router.get('/:title/edit', (req, res)=>{
   res.render('edit');
