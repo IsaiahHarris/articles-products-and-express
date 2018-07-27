@@ -29,8 +29,8 @@ router.post('/', (req, res, next)=>{
 router.put('/:title', (req,res,next)=>{
   let title = req.params.title;
   articlesData.all().map(element =>{
-    if(element.title === Number(title)){
-      element.name = req.body.name
+    if(element.title === title){
+      element.title = req.body.title
     }
   })
   res.redirect('/articles');
