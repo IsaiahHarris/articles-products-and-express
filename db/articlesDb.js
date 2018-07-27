@@ -15,6 +15,8 @@ function remove(element){
   let index = articleCollection.indexOf(element)
     articleCollection.splice(index, 1);
 }
+
+
 module.exports = {
   all:all,
   add:add,

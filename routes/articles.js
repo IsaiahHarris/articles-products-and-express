@@ -45,7 +45,9 @@ router.put('/:title', (req, res, next) => {
     console.log('lsadkjf;lk');
     res.redirect(303, `/articles/${title}/edit`);
   } else {
-    res.redirect(303, `/articles/${title}`)
+    res.render('edit', {
+      article: articlesData.all()
+    })
   }
 })
 let deleted = false;
@@ -90,8 +92,21 @@ router.get('/:title', (req, res) => {
     }
   })
 })
+let found = false;
+let elem;
 router.get('/:title/edit', (req, res) => {
-  res.render('edit');
+  let title = req.params.title;
+  articlesData.all().map(element => {
+    if (element.title === title) {
+      found = true;
+      elem = element;
+
+      return elem;
+    }
+  })
+  res.render('edit', {
+    article: elem
+  })
 })
 
 
