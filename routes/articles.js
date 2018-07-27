@@ -14,26 +14,35 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
+  console.log(req.body)
   if (!req.body.title) {
-    res.send('no title')
-    res.redirect('/articles/new')
+    // res.send('no title');
+    res.redirect('/articles/new');
   } else if (!req.body.author) {
-    res.send('no author')
-    res.redirect('/articles/new')
+    console.log('no author');
+    // res.send('no author');
+    res.redirect(303, '/articles/new');
   }else {
-    articlesData.add(req.body)
+    articlesData.add(req.body);
     res.redirect('/articles');
   }
 })
+let itemFound = false;
 
 router.put('/:title', (req, res, next) => {
   let title = req.params.title;
   articlesData.all().map(element => {
     if (element.title === title) {
       element.title = req.body.title
+      itemFound = true;
     }
   })
-  res.redirect('/articles');
+  if (itemFound === false) {
+    console.log('lsadkjf;lk');
+    res.redirect(303, `/articles/${title}/edit`);
+  } else {
+    res.redirect(303, `/articles/${title}`)
+  }
 })
 
 router.delete(`/:title`, (req, res) => {
@@ -41,6 +50,10 @@ router.delete(`/:title`, (req, res) => {
   for (let i = 0; i < articlesData.all().length; i++) {
     if (title === articlesData.all()[i].title) {
       articlesData.remove(i);
+      res.render('home', {
+        showArticles: true,
+        articles: articlesData.all()
+      })
     }
   }
   res.redirect('/articles');
@@ -56,6 +69,10 @@ router.get('/', (req, res) => {
     articles: articlesData.all()
   })
 })
+router.get('/new', (req, res)=>{
+  console.log('this is new');
+  res.render('new');
+})
 
 router.get('/:title', (req, res) => {
   let title = req.params.title;
@@ -67,5 +84,11 @@ router.get('/:title', (req, res) => {
     }
   })
 })
+
+
+router.get('/:title/edit', (req, res)=>{
+  res.render('edit');
+})
+
 
 module.exports = router;
