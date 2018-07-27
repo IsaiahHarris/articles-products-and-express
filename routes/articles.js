@@ -81,18 +81,26 @@ router.get('/new', (req, res) => {
   console.log('this is new');
   res.render('new');
 })
-
+let getTitle =false;
+let elemt;
 router.get('/:title', (req, res) => {
   let title = req.params.title;
   articlesData.all().map(element => {
     if (element.title === title) {
-      res.render('article', {
-        article: element
-      })
+      getTitle = true
+      elemt = element
+      return elemt
     }
   })
+  if(getTitle){
+    res.render('article', {
+      article: elemt
+    })
+  }else {
+    res.render('new');
+  }
 })
-let found = false;
+
 let elem;
 router.get('/:title/edit', (req, res) => {
   let title = req.params.title;
@@ -100,7 +108,6 @@ router.get('/:title/edit', (req, res) => {
     if (element.title === title) {
       found = true;
       elem = element;
-
       return elem;
     }
   })
@@ -108,7 +115,5 @@ router.get('/:title/edit', (req, res) => {
     article: elem
   })
 })
-
-
 
 module.exports = router;
