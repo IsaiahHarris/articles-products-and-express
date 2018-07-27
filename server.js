@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const router = express.Router();
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser')
 const articlesRoute = require('./routes/articles');
@@ -19,7 +18,6 @@ app.engine('.hbs',exphbs({
 }));
 
 app.set('view engine', '.hbs');
-
 
 
 app.use('/articles', articlesRoute)

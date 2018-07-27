@@ -2,7 +2,9 @@
   <h1>Articles</h1>
   <ul>Articles List</ul>
   {{#each articles}}
-    <li>{{this.name}}</li>
-      <h5>Product ID: {{this.id}}</h5>
+    <li>Title: {{this.title}}</li>
+      <h5>Author: {{this.author}}</h5>
+      <p>{{this.body}}</p>
+      <p>Url Title: {{this.urlTitle}}</p>
   {{/each}}
 {{/if}}

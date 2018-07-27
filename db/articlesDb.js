@@ -1,16 +1,21 @@
-const articleCollection = [{id: 0, name: 'shoe', price:70, inventory: 0}];
+const articleCollection = [];
 
 function all(){
   return articleCollection;
 }
 
 function add(item){
-  articleCollection.push(item);
+    item.urlTitle = encodeURI(item.title)
+    articleCollection.push(item);
 }
 function createId(){
-  return Math.floor((Math.random)*100 + 1);
+  return Math.floor(Math.random() * 6) + 1  
+}
+function remove(element){
+    articleCollection.splice(element, 1);
 }
 module.exports = {
   all:all,
-  add:add
+  add:add,
+  remove:remove
 }
