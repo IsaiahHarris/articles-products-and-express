@@ -22,7 +22,7 @@ router.post('/', (req, res, next) => {
     console.log('no author');
     // res.send('no author');
     res.redirect(303, '/articles/new');
-  }else {
+  } else {
     articlesData.add(req.body);
     res.redirect('/articles');
   }
@@ -47,16 +47,18 @@ router.put('/:title', (req, res, next) => {
 let deleted = false;
 router.delete(`/:title`, (req, res) => {
   let title = req.params.title;
-  articlesData.all().map(element=>{
-    if(element.title === title){
+  articlesData.all().map(element => {
+    if (element.title === title) {
       articlesData.remove(element)
       deleted = true;
     }
   })
-  if(deleted === false){
-    res.render('new')
-  }else {
-    res.redirect('index')
+  if (deleted === false) {
+    res.render(`new`);
+  } else {
+    res.render('index',{
+      article: articlesData.all()
+    });
   }
 })
 /////////////
@@ -70,7 +72,7 @@ router.get('/', (req, res) => {
     articles: articlesData.all()
   })
 })
-router.get('/new', (req, res)=>{
+router.get('/new', (req, res) => {
   console.log('this is new');
   res.render('new');
 })
@@ -79,14 +81,14 @@ router.get('/:title', (req, res) => {
   let title = req.params.title;
   articlesData.all().map(element => {
     if (element.title === title) {
-      res.render('article',{
-         article: element
+      res.render('article', {
+        article: element
       })
     }
   })
 })
 
-router.get('/:title/edit', (req, res)=>{
+router.get('/:title/edit', (req, res) => {
   res.render('edit');
 })
 

@@ -1,4 +1,4 @@
-const articleCollection = [{author: 'bob', body: 'ksbdaldjh', title:'bobtitle'}];
+const articleCollection = [{author: 'bob', body: 'ksbdaldjh', title:'bob title'}];
 
 function all(){
   return articleCollection;
@@ -12,7 +12,8 @@ function createId(){
   return Math.floor(Math.random() * 6) + 1  
 }
 function remove(element){
-    articleCollection.splice(element, 1);
+  let index = articleCollection.indexOf(element)
+    articleCollection.splice(index, 1);
 }
 module.exports = {
   all:all,

@@ -1,9 +1,8 @@
-{{#if showArticles}}
 <h1>Articles</h1>
-<ul>Articles List</ul>
-{{#each articles}}
-<li>Title: {{this.title}}</li>
-<h5>Author: {{this.author}}</h5>
-<p>{{this.body}}</p>
-<p>Url Title: {{this.urlTitle}}</p>
-{{/each}} {{/if}}
+<ul>
+  {{#each article}}
+  <li>Title: {{this.title}}</li>
+  <p>Author: {{this.author}}</p>
+  <p>Body: {{this.body}}</p>
+  {{/each}}
+</ul>
