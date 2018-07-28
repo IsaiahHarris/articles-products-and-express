@@ -21,13 +21,9 @@ router.post('/', (req, res, next) => {
   }
 })
 
-
-
 router.put('/:title', (req, res, next) => {
   articlesData.update(req.params.title, req, res);
 })
-
-
 
 router.delete(`/:title`, (req, res) => {
   articlesData.remove(req.params.title, res);
@@ -41,33 +37,31 @@ router.get('/', (req, res) => {
 })
 
 router.get('/new', (req, res) => {
-  console.log('this is new');
   res.render('new');
 })
 
 router.get('/:title', (req, res) => {
   let elem = articlesData.findTitle(req.params.title);
-  if(elem){
-    res.render('article',{
-      article:elem
+  if (elem) {
+    res.render('article', {
+      article: elem
     })
-  }else {
-    res.render('new',{
-      article:req.params
+  } else {
+    res.render('new', {
+      article: req.params
     });
   }
 })
 
 router.get('/:title/edit', (req, res) => {
   let elem = articlesData.findTitle(req.params.title);
-  if(elem){
+  if (elem) {
     res.render('edit', {
       article: elem
     })
-  }else {
+  } else {
     res.render('new');
   }
-  
 })
 
 module.exports = router;
