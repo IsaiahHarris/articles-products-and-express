@@ -14,7 +14,6 @@ function createId() {
 }
 
 function update(title, req, res){
-
   articleCollection.map(element => {
     if (element.title === title) {
       element.title = req.body.title
@@ -46,8 +45,6 @@ function remove(title, res) {
   } else {
     res.redirect('/articles')
   }
-
-
 }
 
 function findTitle(title) {
