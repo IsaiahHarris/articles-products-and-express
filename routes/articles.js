@@ -45,18 +45,7 @@ router.put('/:title', (req, res, next) => {
 let deleted = false;
 
 router.delete(`/:title`, (req, res) => {
-  let title = req.params.title;
-  articlesData.all().map(element => {
-    if (element.title === title) {
-      articlesData.remove(element)
-      deleted = true;
-    }
-  })
-  if (deleted === false) {
-    res.redirect(`/articles/new`);
-  } else {
-    res.redirect('/articles')
-  }
+  articlesData.remove(req.params.title, res);
 })
 
 router.get('/', (req, res) => {
