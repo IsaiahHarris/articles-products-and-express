@@ -7,6 +7,7 @@ const articlesRoute = require('./routes/articles');
 const productsRoute = require('./routes/products');
 const PORT = process.env.PORT || 8080;
 
+app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
@@ -19,7 +20,7 @@ app.use(methodOverride((req, res) => {
 }));
 
 app.get('/', (req, res, next)=>{
-  res.send('you got'+ articlesRoute.all());
+  res.render('landingPage');
 })
 
 app.engine('.hbs',exphbs({
