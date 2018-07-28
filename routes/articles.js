@@ -25,21 +25,7 @@ router.post('/', (req, res, next) => {
 let itemFound = false;
 
 router.put('/:title', (req, res, next) => {
-  console.log('/:title');
-  let title = req.params.title;
-  articlesData.all().map(element => {
-    if (element.title === title) {
-      element.title = req.body.title
-      element.author = req.body.author
-      element.body = req.body.body;
-      itemFound = true;
-    }
-  })
-  if (itemFound === false) {
-    res.redirect(303, `/articles/${title}/edit`);
-  } else {
-    res.redirect('/articles');
-  }
+  articlesData.update(req.params.title);
 })
 
 let deleted = false;
@@ -67,7 +53,9 @@ router.get('/:title', (req, res) => {
       article:elem
     })
   }else {
-    res.render('new');
+    res.render('new',{
+      article:req.params
+    });
   }
 })
 

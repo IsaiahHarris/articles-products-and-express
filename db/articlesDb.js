@@ -13,6 +13,24 @@ function createId() {
   return Math.floor(Math.random() * 6) + 1
 }
 
+function update(title){
+  let title = req.params.title;
+  articleCollection.map(element => {
+    if (element.title === title) {
+      element.title = req.body.title
+      element.author = req.body.author
+      element.body = req.body.body;
+      itemFound = true;
+    }
+  })
+  if (itemFound === false) {
+    itemFound = true
+    res.redirect(303, `/articles/${title}/edit`);
+  } else {
+    res.redirect('/articles');
+  }
+}
+
 function remove(title, res) {
   let deleted = false
   articleCollection.map(element => {
@@ -48,4 +66,5 @@ module.exports = {
   add,
   remove,
   findTitle,
+  update
 }
