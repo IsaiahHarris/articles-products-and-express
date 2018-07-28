@@ -9,10 +9,6 @@ function add(item) {
   articleCollection.push(item);
 }
 
-function createId() {
-  return Math.floor(Math.random() * 6) + 1
-}
-
 function update(title, req, res) {
   articleCollection.map(element => {
     if (element.title === title) {

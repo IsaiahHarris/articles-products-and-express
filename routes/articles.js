@@ -31,7 +31,6 @@ router.delete(`/:title`, (req, res) => {
 
 router.get('/', (req, res) => {
   res.render('index', {
-    showArticles: true,
     articles: articlesData.all()
   })
 })
