@@ -1,7 +1,7 @@
 <h1>Articles</h1>
 <ul>
   {{#each article}}
-  <li>Title: {{this.title}}</li>
+  <a href="/articles/{{this.title}}">{{this.title}}</a>
   <p>Author: {{this.author}}</p>
   <p>Body: {{this.body}}</p>
   {{/each}}
