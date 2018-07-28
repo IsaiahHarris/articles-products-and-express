@@ -1,3 +1,48 @@
-html{
-  background-color:lightblue; 
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+.header{
+  width:100%;
+  height: 55px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.resource-choices-container{
+
+}
+
+
+.article-choice-container{
+  height:320px;
+  width:100%;
+  background-image: url('/assets/newspaperChoice.jpg');
+  background-size: 100% 100%;
+  text-align: center;
+  color:black;
+  margin-top:10px;
+}
+
+.product-choice-container{
+  height: 320px;
+  width:100%;
+  background-image: url('/assets/productsChoice.jpg');
+  background-size: 100% 100%;
+  text-align:center;
+}
+
+.landingFooterContainer{
+  height: 106.5px;
+  width:100%;
+  background-color:#191919;
+  color:whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.landingFooterItems{
+  text-align: center; 
 }
