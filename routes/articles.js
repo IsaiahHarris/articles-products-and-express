@@ -13,7 +13,6 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  console.log(req.body)
   if (!req.body.title || !req.body.author) {
     res.redirect('/articles/new');
   } else {
@@ -22,13 +21,13 @@ router.post('/', (req, res, next) => {
   }
 })
 
-let itemFound = false;
+
 
 router.put('/:title', (req, res, next) => {
-  articlesData.update(req.params.title);
+  articlesData.update(req.params.title, req, res);
 })
 
-let deleted = false;
+
 
 router.delete(`/:title`, (req, res) => {
   articlesData.remove(req.params.title, res);
@@ -63,7 +62,7 @@ router.get('/:title/edit', (req, res) => {
   let elem = articlesData.findTitle(req.params.title);
   if(elem){
     res.render('edit', {
-      article: foundTitle
+      article: elem
     })
   }else {
     res.render('new');
