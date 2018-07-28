@@ -71,27 +71,27 @@ router.get('/new', (req, res) => {
   res.render('new');
 })
 
-let getTitle = false;
-
 router.get('/:title', (req, res) => {
-  let foundTitle = articlesData.findTitle(req.params.title);
-  getTitle = true;
-  if (getTitle === true) {
-    res.render('article', {
-      article: foundTitle
+  let elem = articlesData.findTitle(req.params.title);
+  if(elem){
+    res.render('article',{
+      article:elem
     })
-  } else {
-    res.render('new', {
-      article: foundTitle
-    })
+  }else {
+    res.render('new');
   }
 })
 
 router.get('/:title/edit', (req, res) => {
-  let foundTitle = articlesData.findTitle(req.params.title);
-  res.render('edit', {
-    article: foundTitle
-  })
+  let elem = articlesData.findTitle(req.params.title);
+  if(elem){
+    res.render('edit', {
+      article: foundTitle
+    })
+  }else {
+    res.render('new');
+  }
+  
 })
 
 module.exports = router;

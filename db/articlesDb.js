@@ -23,6 +23,7 @@ function findTitle(title){
   articleCollection.map(element=>{
     if(element.title === title){
       elem = element
+      getTitle = true
     }
   })
   return elem;
