@@ -1,6 +1,11 @@
 <h1>Products</h1>
+<a href="/products/new">add a new article</a>
   <ul>Product List</ul>
   {{#each product}}
+    <div>
+    TITLE: 
+<a href="/products/{{this.id}}">{{this.id}}</a>
+  </div>
     <li>ID: {{this.id}}</li>
       <h5>Price: {{this.price}}</h5>
       <p>{{this.inventory}}In Stock</p>
