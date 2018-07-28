@@ -1,0 +1,9 @@
+<h1>Edit Product</h1>
+<form enctype="application/x-www-form-urlencoded" method="POST" action="/articles/{{article.title}}?_method=PUT">
+  <input type="hidden" name="_method" value="PUT">
+  <input type="text" name="id" value={{product.id}}>
+  <input type="text" name="name" value={{product.name}}>
+  <input type="text" name="inventory" value={{product.inventory}}>
+  <input type="text" name = "price" value={{product.price}}>
+  <input type="submit" value="Submit">
+</form>

@@ -1,0 +1,8 @@
+<h1>Products</h1>
+  <ul>Product List</ul>
+  {{#each product}}
+    <li>ID: {{this.id}}</li>
+      <h5>Price: {{this.price}}</h5>
+      <p>{{this.inventory}}In Stock</p>
+      <p>Name: {{this.name}}</p>
+  {{/each}}
