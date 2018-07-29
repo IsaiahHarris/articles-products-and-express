@@ -1,4 +1,4 @@
-const productCollection = [{ name: 'shoe', price: '50', inventory: '5' }]
+const productCollection = [{ name: 'shoe', price: '50', inventory: '5', id: '3'}]
 let errorMessage = 'ITEM DOESNT EXIST, do you want to add it?';
 function allProducts() {
   return productCollection;
@@ -10,7 +10,7 @@ function productIdGenerator() {
 
 function addProduct(req) {
   let newProduct = {};
-  newProduct.id = productIdGenerator();
+  newProduct.id = 2;
   newProduct.name = req.body.name;
   newProduct.price = Number(req.body.price);
   newProduct.inventory = Number(req.body.inventory);

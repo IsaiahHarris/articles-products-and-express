@@ -10,11 +10,10 @@
 </div>
 <div class = 'article-entries-container'>
   {{#each articles}}
-  <div id='articles-entries'>
-  <div>
-    TITLE:
-    <a href="/articles/{{this.title}}">{{this.title}}</a>
-  </div>
+  <div id='articles-entries'>  
+    <form action="/articles/{{this.title}}">
+    <input type="submit" value="{{this.title}}" class = 'atitle'>
+    </form> 
   <h5>Author: {{this.author}}</h5>
   <p id = 'article-body'>BODY: {{this.body}}</p>
   <p>Url Title: {{this.urlTitle}}</p>

@@ -22,7 +22,7 @@ function validateArticleInfo(req, res, next) {
 function validateProductInfo(req, res, next) {
   let success = false;
   if (!req.body.name || isNaN(parseInt(req.body.price)) || !req.body.price || isNaN(parseInt(req.body.inventory)) || !req.body.inventory) {
-    errorMessage = 'ALL FIELDS MUST BE FILLED OUT';
+    errorMessage = 'ALL FIELDS MUST BE FILLED OUT, PRICE AND INVENTORY MUST BE NUMBERS';
   } else {
     success = true;
   }

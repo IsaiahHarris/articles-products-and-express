@@ -116,11 +116,51 @@ color:white
   background-size: 100% 100%;
   height: 812px;
 }
+
+#products-entries{
+  display: flex;
+  flex-direction: column;
+  background-color:black;
+  color: white;
+  width:45%;
+  margin:7px;
+}
+.productHomeHeader{
+  display:flex;
+  width:100%;
+  height:55px;
+  align-items: center;
+  justify-content: space-around;
+  color:black;
+}
+#product-body{
+  text-overflow:ellipsis;
+  overflow: hidden;
+  white-space: nowrap; 
+}
+
+.product-entries-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left:10px;
+}
+.productHomeWrapper{
+  background-image:url('/assets/storePortrait.jpg');
+  background-size: 100% 100%;
+  height: 812px;
+}
 .anew{
   color:white;
   background-color: black;
   height: 20px;
   font-size:15px;
+}
+.pnew{
+  color: black;
+  background-color: white;
+  height: 20px;
+  font-size:15;
 }
 ::placeholder{
   color:lightgray;
@@ -132,7 +172,19 @@ color:white
   height: 20px;
   margin:20px;
 }
-
+.ptitle{
+  font-size: 25px;
+  font-family: 'Courier New', Courier, monospace;
+  color:white;
+}
+.atitle{
+  font-size: 25px;
+  font-family: 'Courier New', Courier, monospace;
+  color:black;
+}
+.title:hover{
+  color:green;
+}
 .submit{
   background-color: black;
   color:white;

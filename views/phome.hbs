@@ -1,13 +1,22 @@
-<h1>Products</h1>
-<a href="/products/new">add a new article</a>
-  <ul>Product List</ul>
+<div class="productHomeWrapper">
+<div class="productHomeHeader">
+  <form action="/products/new">
+  <input class = 'pnew' type="submit" value='Add a New product'>
+  </form>
+  <h1 id = 'product-h1'>products</h1>
+  <form action="/">
+  <input type="submit" value="HOME" class = 'home-button'>
+  </form>
+</div>
+<div class = 'product-entries-container'>
   {{#each product}}
-    <div>
-    TITLE: 
-<a href="/products/{{this.id}}">{{this.id}}</a>
+  <div id='products-entries'>
+<form action="/products/{{this.id}}">
+    <input type="submit" value="{{this.id}}" class = 'ptitle'>
+    </form> 
+  <h5>NAME: {{this.name}}</h5>
+  <p id = 'product-body'>PRICE: {{this.price}}</p>
+  <p>INVENTORY: {{this.inventory}}</p>
   </div>
-    <li>ID: {{this.id}}</li>
-      <h5>Price: {{this.price}}</h5>
-      <p>{{this.inventory}}In Stock</p>
-      <p>Name: {{this.name}}</p>
   {{/each}}
+</div>
