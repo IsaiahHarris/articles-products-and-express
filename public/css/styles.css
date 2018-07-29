@@ -143,6 +143,8 @@ color:white
 .home-button{
   color:white;
   background-color: black;
+  height: 20px;
+  font-size:15px;
 }
 
 #article-h1{
