@@ -1,4 +1,4 @@
-const articleCollection = [{ author: 'bob', body: 'ksbdaldjh', title: 'bobtitle' }];
+const articleCollection = [{ author: 'bob', body: 'Lorizzle ipsum dolizzle sit brizzle, consectetuer adipiscing elit. Nullizzle yo velizzle, fo shizzle volutpizzle, arzipizzle shizznit, gravida boofron, arcu. Pellentesque eget tortor. Dope erizzle. Black izzle dizzling dapogizzle gangster Tempus tempizzle. Mauris pellentesque fresh funky we gonna chung turpizzle. Ass izzle i saw beyonce tizzles and my pizzle went crizzle. Pellentesque eleifend rhoncizzle things. In fizzle you have a bizzle platea daahng dawg. Donec dapibizzle. Mofo tellizzle urna, gangsta izzle, mattis boofron, eleifend gangsta, nunc. I saw beyonces tizzles and my pizzle went to cryzzle aroused. Integer pimpin,', title: 'bobtitle' }];
 
 function all() {
   return articleCollection;

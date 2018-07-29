@@ -2,27 +2,55 @@ html, body{
   margin: 0;
   padding: 0;
 }
+.frontPageWrapper{
+  background-image: url('/assets/skyBackground.jpg');
+  background-size: 100% 100%;
+}
 
 .header{
   width:100%;
   height: 55px;
   font-size: 20px;
   font-weight: bold;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.resource-choices-container{
-
+.icon{
+  margin-right:20px;
+  margin-bottom:10px;
 }
 
+.header-title{
+  height: 40px;
+  margin-left:7px;
+}
+
+.searchBar{
+height: 812px;
+background-color: whitesmoke;
+width: 100px;
+margin-left:275px;
+}
+
+.ptext{
+color:white
+}
+
+.atext{
+  color:black;
+}
 
 .article-choice-container{
   height:320px;
   width:100%;
   background-image: url('/assets/newspaperChoice.jpg');
   background-size: 100% 100%;
-  text-align: center;
-  color:black;
   margin-top:10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product-choice-container{
@@ -30,9 +58,18 @@ html, body{
   width:100%;
   background-image: url('/assets/productsChoice.jpg');
   background-size: 100% 100%;
-  text-align:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#articles-choice{
+  color:black;
+  margin-bottom:50px;
 }
 
+#products-choice{
+  color:white;
+}
 .landingFooterContainer{
   height: 106.5px;
   width:100%;
@@ -45,4 +82,30 @@ html, body{
 }
 .landingFooterItems{
   text-align: center; 
+}
+#articles-entries{
+  display: flex;
+  flex-direction: column;
+  background-color:whitesmoke;
+  width:45%;
+  margin:5px;
+}
+.articleHomeHeader{
+  display:flex;
+  width:100%;
+  height:55px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-bottom: 1px black solid;
+}
+#article-body{
+  text-overflow:ellipsis;
+  overflow: hidden;
+  white-space: nowrap; 
+}
+
+.article-entries-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
