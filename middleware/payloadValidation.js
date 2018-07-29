@@ -1,30 +1,27 @@
 const productData = require('../db/productDb');
 const articleData = require('../db/articlesDb');
 
-let isValid;
-let product;
-let renderRoute;
+let errorMessage;
 
-function validateProduct(req,res,next){
-  const name = req.body.name;
-  const price = req.body.price;
-  const inventory = req.body.inventory
 
-  isValid = true;
-
-  if(req.params.id){
-    product = productData.findId(req.params.id);
+function validateArticleInfo(req, res, next) {
+  let success = false;
+  if (!req.body.title || !req.body.author || !req.body.body) {
+    errorMessage = 'ALL FIELDS MUST BE FILLED OUT';
+  }else {
+    success = true;
   }
-
-  setRenderRoute(req, 'products');
-
-
+  if(success === false){
+    res.render('new',{
+      errorMessage: errorMessage
+    })
+  }else {
+    next();
+  }
+  
 }
 
-function setRenderRoute(req, resource) {
-  if (req.method === 'POST') {
-    renderRoute = `${resource}/new`;
-  } else if (req.method === 'PUT') {
-    renderRoute = `${resource}/edit`;
-  }
+module.exports = {
+  validateArticleInfo
 }
+

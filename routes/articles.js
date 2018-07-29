@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser')
 const articlesData = require('../db/articlesDb');
+const payloadValidation = require('../middleware/payloadValidation');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -12,13 +13,9 @@ router.get('/', (req, res, next) => {
   })
 })
 
-router.post('/', (req, res, next) => {
-  if (!req.body.title || !req.body.author) {
-    res.redirect('/articles/new');
-  } else {
-    articlesData.add(req.body);
-    res.redirect('/articles');
-  }
+router.post('/', payloadValidation.validateArticleInfo, (req, res, next) => {
+  articlesData.add(req.body);
+  res.redirect('/articles');
 })
 
 router.put('/:title', (req, res, next) => {
