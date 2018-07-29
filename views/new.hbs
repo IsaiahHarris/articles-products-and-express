@@ -1,7 +1,10 @@
 <h1>Input New Article</h1>
-<form enctype="application/x-www-form-urlencoded" method="POST" action="/articles">  
-    <input type="text" name="title" value={{article.title}}>    
-    <input type="text" name="author">  
-    <input type="text" name="body">  
-  <input type="submit" value="Submit">
+<form enctype="application/x-www-form-urlencoded" method="POST" action="/articles">
+  <div>TITLE</div>
+  <input type="text" name="title" class='input' placeholder="Title" value="{{article.title}}">
+  <div>AUTHOR</div>
+  <input type="text" name="author" placeholder="Author" class='input'>
+  <div>BODY</div>
+  <input type="text" name="body" placeholder="Body" class="input">
+  <input type="submit" class = 'submit' value="Submit">
 </form>
