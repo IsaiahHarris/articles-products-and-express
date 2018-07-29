@@ -1,7 +1,12 @@
 <h1>Input New Product</h1>
-<form enctype="application/x-www-form-urlencoded" method="POST" action="/articles">  
-    <input type="text" name="title" value={{product.title}}>    
-    <input type="text" name="author">  
-    <input type="text" name="body">  
+<form enctype="application/x-www-form-urlencoded" method="POST" action="/products">
+  <div>NAME</div>
+  <input type="text" name="name" value={{product.name}}>
+  <div>PRICE</div>
+  <input type="text" name="price">
+  <div>INVENTORY</div>
+  <input type="text" name="inventory">
+  <div>submit</div>
   <input type="submit" value="Submit">
+  <div>{{errorMessage}}</div>
 </form>

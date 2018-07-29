@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
 const productData = require('../db/productDb');
+const payloadValidation = require('../middleware/payloadValidation');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -12,14 +13,9 @@ router.get('/', (req, res, next) => {
   })
 })
 
-
-router.post('/', (req, res) => {
-  if (!req.body.name || !req.body.price || !req.body.inventory) {
-    res.redirect('/products/new');
-  } else {
-    articlesData.add(req.body);
-    res.redirect('/products');
-  }
+router.post('/', payloadValidation.validateProductInfo, (req, res) => {
+  productData.addProduct(req);
+  res.redirect('/products');
 })
 
 router.put('/:id', (req, res) => {

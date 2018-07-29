@@ -1,5 +1,5 @@
 const productCollection = [{ name: 'shoe', price: '50', inventory: '5' }]
-
+let errorMessage = 'ITEM DOESNT EXIST, do you want to add item?';
 function allProducts() {
   return productCollection;
 }
@@ -11,9 +11,9 @@ function productIdGenerator() {
 function addProduct(req) {
   let newProduct = {};
   newProduct.id = productIdGenerator();
-  newProduct.name = req.name;
-  newProduct.price = Number(req.price);
-  newProduct.inventory = Number(req.inventory);
+  newProduct.name = req.body.name;
+  newProduct.price = Number(req.body.price);
+  newProduct.inventory = Number(req.body.inventory);
   productCollection.push(newProduct);
 }
 
@@ -28,7 +28,9 @@ function removeProduct(id, res) {
   })
   if (deletedProduct === false) {
     deletedProduct = true;
-    res.redirect('products/new');
+    res.render('new', {
+      errorMessage: errorMessage
+    })
   } else {
     res.redirect('/products');
   }
