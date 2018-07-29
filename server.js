@@ -5,11 +5,14 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser')
 const articlesRoute = require('./routes/articles');
 const productsRoute = require('./routes/products');
+const analytics = require('./middleware/analytics');
 const PORT = process.env.PORT || 8080;
 
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+
+
 
 app.use(methodOverride((req, res) => {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
