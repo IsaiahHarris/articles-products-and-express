@@ -1,5 +1,5 @@
 const productCollection = [{ name: 'shoe', price: '50', inventory: '5' }]
-let errorMessage = 'ITEM DOESNT EXIST, do you want to add item?';
+let errorMessage = 'ITEM DOESNT EXIST, do you want to add it?';
 function allProducts() {
   return productCollection;
 }
@@ -17,7 +17,7 @@ function addProduct(req) {
   productCollection.push(newProduct);
 }
 
-function removeProduct(id, res) {
+function removeProduct(id, res, req) {
   let deletedProduct = false;
   productCollection.map(element => {
     if (element.id === id) {
@@ -28,8 +28,9 @@ function removeProduct(id, res) {
   })
   if (deletedProduct === false) {
     deletedProduct = true;
-    res.render('new', {
-      errorMessage: errorMessage
+    res.render('pnew', {
+      errorMessage: errorMessage,
+      productName: req.params
     })
   } else {
     res.redirect('/products');

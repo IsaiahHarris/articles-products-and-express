@@ -23,7 +23,7 @@ router.put('/:title', (req, res, next) => {
 })
 
 router.delete(`/:title`, (req, res) => {
-  articlesData.remove(req.params.title, res);
+  articlesData.remove(req.params.title, res, req);
 })
 
 router.get('/', (req, res) => {

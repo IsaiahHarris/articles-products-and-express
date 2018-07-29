@@ -23,7 +23,7 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  productData.removeProduct(req.params.id, res)
+  productData.removeProduct(req.params.id, res, req)
 })
 
 router.get('/', (req, res) => {

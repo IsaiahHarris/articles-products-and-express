@@ -1,5 +1,5 @@
 const articleCollection = [{ author: 'bob', body: 'Lorizzle ipsum dolizzle sit brizzle, consectetuer adipiscing elit. Nullizzle yo velizzle, fo shizzle volutpizzle, arzipizzle shizznit, gravida boofron, arcu. Pellentesque eget tortor. Dope erizzle. Black izzle dizzling dapogizzle gangster Tempus tempizzle. Mauris pellentesque fresh funky we gonna chung turpizzle. Ass izzle i saw beyonce tizzles and my pizzle went crizzle. Pellentesque eleifend rhoncizzle things. In fizzle you have a bizzle platea daahng dawg. Donec dapibizzle. Mofo tellizzle urna, gangsta izzle, mattis boofron, eleifend gangsta, nunc. I saw beyonces tizzles and my pizzle went to cryzzle aroused. Integer pimpin,', title: 'bobtitle' }];
-
+let errorMessage = 'ITEM DOESNT EXIST, do you want to add it?'
 function all() {
   return articleCollection;
 }
@@ -26,7 +26,7 @@ function update(title, req, res) {
   }
 }
 
-function remove(title, res) {
+function remove(title, res, req) {
   let deleted = false
   articleCollection.map(element => {
     if (element.title === title) {
@@ -37,7 +37,10 @@ function remove(title, res) {
   })
   if (deleted === false) {
     deleted = true;
-    res.redirect(`/articles/new`);
+    res.render('new', {
+      errorMessage: errorMessage,
+      articleTitle: req.params
+    });
   } else {
     res.redirect('/articles')
   }
