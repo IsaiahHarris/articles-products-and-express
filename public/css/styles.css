@@ -99,7 +99,7 @@ color:white
   justify-content: space-around;
   color:white;
 }
-#article-body{
+.article-body{
   text-overflow:ellipsis;
   overflow: hidden;
   white-space: nowrap; 
@@ -136,7 +136,8 @@ color:white
 #product-body{
   text-overflow:ellipsis;
   overflow: hidden;
-  white-space: nowrap; 
+  white-space: pre-wrap;
+  word-wrap:break-word;
 }
 
 .product-entries-container{
@@ -172,6 +173,12 @@ color:white
   height: 20px;
   margin:20px;
 }
+.inputa{
+  background-color: white;
+  color:black;
+  height: 20px;
+  margin:20px;
+}
 .ptitle{
   font-size: 25px;
   font-family: 'Courier New', Courier, monospace;
@@ -191,6 +198,12 @@ color:white
   height: 20px;
   margin:20px;
 }
+.submita{
+  background-color: white;
+  color:black;
+  height: 20px;
+  margin:20px;
+}
 
 .home-button{
   color:white;
@@ -201,4 +214,33 @@ color:white
 
 #article-h1{
   margin-right:45px;
+}
+
+.specArtHead{
+  width:100%;
+  height: 55px;
+}
+.specArtContainer{
+  font-size:20px;
+  height: 425px;
+  width:375px;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-evenly;
+  white-space: pre-wrap;
+  word-wrap:break-word;
+}
+
+.specActionContainer{
+  display: flex;
+  height: 50px;
+  width:50px;
+  margin-top:10px;
+margin-left:27px;
+}
+
+.spec-action{
+  height: 50px;
+  width:150px;
+  font-size: 20px;
 }

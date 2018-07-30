@@ -1,14 +1,20 @@
-<h1>Article</h1>
-<h2>{{article.title}}</h2>
-<h2>{{article.author}}</h2>
-<h2>{{article.body}}</h2>
-<h2>{{article.urlTitle}}</h2>
+<div class='specArtHead'>
+  <h1>Article</h1>
+</div>
+<div class="specArtContainer">
+  <div>{{article.title}}</div>
+  <div>BY: {{article.author}}</div>
+  <div>BODY: {{article.body}}</div>
+  <div>URL TITLE: {{article.urlTitle}}</div>
+</div>
+
+<div class = 'specActionContainer'>
 
 <form action="/articles/{{article.title}}/edit" method="GET" enctype="application/x-www-form-urlencoded">
-<input type="submit" value="edit item">
+  <input type="submit" value="edit item" class ='spec-action'>
 </form>
-
 <form action='/articles/{{article.title}}' method="POST" enctype="application/x-www-form-urlencoded">
-<input type="hidden" name = "_method" value="DELETE">
-<input type="submit" value="delete item">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete item" class = 'spec-action'>
 </form>
+</div>

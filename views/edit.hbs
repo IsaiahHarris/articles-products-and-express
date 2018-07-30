@@ -1,8 +1,14 @@
-<h1>Edit Article</h1>
+<div class="editHeader">
+  <h1 class='edith1'>Edit Article</h1>
+</div>
 <form enctype="application/x-www-form-urlencoded" method="POST" action="/articles/{{article.title}}?_method=PUT">
   <input type="hidden" name="_method" value="PUT">
-  <input type="text" name="title" value="{{article.title}}">
-  <input type="text" name="author" value="{{article.author}}">
-  <input type="text" name="body" value="{{article.body}}">
-  <input type="submit" value="Submit">
+  <div>TITLE</div>
+  <input type="text" name="title" value="{{article.title}}" class = 'inputa'>
+  <div>AUTHOR</div>
+  <input type="text" name="author" value="{{article.author}}" class = 'inputa'>
+  <div>BODY</div>
+  <input type="text" name="body" value="{{article.body}}" class = 'inputa'>
+    <div>APPLY EDITS</div>
+  <input type="submit" value="Submit" class = 'submita'>
 </form>
