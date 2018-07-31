@@ -1,0 +1,12 @@
+<h1>Input New Article</h1>
+<form enctype="application/x-www-form-urlencoded" method="POST" action="/articles">
+  <div>TITLE</div>
+  <input type="text" name="title" class='input' placeholder="Title" value="{{article.title}}" value="{{articleTitle}}">
+  <div>AUTHOR</div>
+  <input type="text" name="author" placeholder="Author" class='input'>
+  <div>BODY</div>
+  <input type="text" name="body" placeholder="Body" class="input">
+  <div>ADD ARTICLE</div>
+  <input type="submit" class = 'submit' value="Submit">
+  <div>{{errorMessage}}</div>
+</form>

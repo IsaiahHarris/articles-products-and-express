@@ -1,0 +1,247 @@
+html, body{
+  margin: 0;
+  padding: 0;
+}
+.frontPageWrapper{
+  background-image: url('/assets/skyBackground.jpg');
+  background-size: 100% 100%;
+}
+
+.header{
+  width:100%;
+  height: 55px;
+  font-size: 20px;
+  font-weight: bold;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon{
+  margin-right:20px;
+  margin-bottom:10px;
+}
+
+.header-title{
+  height: 40px;
+  margin-left:7px;
+}
+
+.searchBar{
+height: 812px;
+background-color: whitesmoke;
+width: 100px;
+margin-left:275px;
+}
+
+.ptext{
+color:white
+}
+
+.atext{
+  color:black;
+}
+
+.article-choice-container{
+  height:320px;
+  width:100%;
+  background-image: url('/assets/newspaperChoice.jpg');
+  background-size: 100% 100%;
+  margin-top:15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-choice-container{
+  height: 320px;
+  width:100%;
+  background-image: url('/assets/productsChoice.jpg');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#articles-choice{
+  color:black;
+  margin-bottom:50px;
+  font-size:18px;
+}
+
+#products-choice{
+  color:white;
+  font-size:18px;
+}
+.landingFooterContainer{
+  height: 100.5px;
+  width:100%;
+  background-color:#191919;
+  color:whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top:solid whitesmoke 3px;
+
+}
+.landingFooterItems{
+  text-align: center; 
+}
+#articles-entries{
+
+  background-color:whitesmoke;
+  width:45%;
+  margin:7px;
+}
+.articleHomeHeader{
+  display:flex;
+  width:100%;
+  height:55px;
+  align-items: center;
+  justify-content: space-around;
+  color:white;
+}
+.article-body{
+  text-overflow:ellipsis;
+  overflow: hidden;
+  white-space: nowrap; 
+}
+
+.article-entries-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left:10px;
+}
+.articleHomeWrapper{
+  background-image:url('/assets/articleBackground.jpg');
+  background-size: 100% 100%;
+  height: 812px;
+}
+
+#products-entries{
+  display: flex;
+  flex-direction: column;
+  background-color:black;
+  color: white;
+  width:45%;
+  margin:7px;
+}
+.productHomeHeader{
+  display:flex;
+  width:100%;
+  height:55px;
+  align-items: center;
+  justify-content: space-around;
+  color:black;
+}
+#product-body{
+  text-overflow:ellipsis;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-wrap:break-word;
+}
+
+.product-entries-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left:10px;
+}
+.productHomeWrapper{
+  background-image:url('/assets/storePortrait.jpg');
+  background-size: 100% 100%;
+  height: 812px;
+}
+.anew{
+  color:white;
+  background-color: black;
+  height: 20px;
+  font-size:15px;
+}
+.pnew{
+  color: black;
+  background-color: white;
+  height: 20px;
+  font-size:15;
+}
+::placeholder{
+  color:lightgray;
+  opacity: 1;
+}
+.input{
+  background-color: black;
+  color:white;
+  height: 20px;
+  margin:20px;
+}
+.inputa{
+  background-color: white;
+  color:black;
+  height: 20px;
+  margin:20px;
+}
+.ptitle{
+  font-size: 25px;
+  font-family: 'Courier New', Courier, monospace;
+  color:white;
+}
+.atitle{
+  font-size: 25px;
+  font-family: 'Courier New', Courier, monospace;
+  color:black;
+}
+.title:hover{
+  color:green;
+}
+.submit{
+  background-color: black;
+  color:white;
+  height: 20px;
+  margin:20px;
+}
+.submita{
+  background-color: white;
+  color:black;
+  height: 20px;
+  margin:20px;
+}
+
+.home-button{
+  color:white;
+  background-color: black;
+  height: 20px;
+  font-size:15px;
+}
+
+#article-h1{
+  margin-right:45px;
+}
+
+.specArtHead{
+  width:100%;
+  height: 55px;
+}
+.specArtContainer{
+  font-size:20px;
+  height: 425px;
+  width:375px;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-evenly;
+  white-space: pre-wrap;
+  word-wrap:break-word;
+}
+
+.specActionContainer{
+  display: flex;
+  height: 50px;
+  width:50px;
+  margin-top:10px;
+margin-left:27px;
+}
+
+.spec-action{
+  height: 50px;
+  width:150px;
+  font-size: 20px;
+}
