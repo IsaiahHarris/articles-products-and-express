@@ -65,10 +65,12 @@ color:white
 #articles-choice{
   color:black;
   margin-bottom:50px;
+  font-size:18px;
 }
 
 #products-choice{
   color:white;
+  font-size:18px;
 }
 .landingFooterContainer{
   height: 100.5px;
@@ -85,8 +87,7 @@ color:white
   text-align: center; 
 }
 #articles-entries{
-  display: flex;
-  flex-direction: column;
+
   background-color:whitesmoke;
   width:45%;
   margin:7px;

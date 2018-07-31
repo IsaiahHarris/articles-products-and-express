@@ -4,9 +4,6 @@ const router = express.Router();
 const productData = require('../db/productDb');
 const payloadValidation = require('../middleware/payloadValidation');
 
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-
 router.get('/', (req, res, next) => {
   res.render('phome', {
     product: productData.allProducts()
@@ -28,7 +25,7 @@ router.delete('/:id', (req, res) => {
 
 router.get('/', (req, res) => {
   res.render('pindex', {
-    product: productData.allProducts()
+    products: productData.allProducts()
   })
 })
 

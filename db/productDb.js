@@ -1,16 +1,17 @@
-const productCollection = [{ name: 'shoe', price: '50', inventory: '5', id: '3'}]
+let id = 1;
+const productCollection = [{ name: 'shoe', price: '50', inventory: '5'}]
 let errorMessage = 'ITEM DOESNT EXIST, do you want to add it?';
 function allProducts() {
   return productCollection;
 }
 
-function productIdGenerator() {
-  return Math.floor(Math.random() * 6) + 1
-}
+// function productIdGenerator() {
+//   return Math.floor(Math.random() * 6) + 1
+// }
 
 function addProduct(req) {
   let newProduct = {};
-  newProduct.id = 2;
+  newProduct.id = id++;
   newProduct.name = req.body.name;
   newProduct.price = Number(req.body.price);
   newProduct.inventory = Number(req.body.inventory);
@@ -25,7 +26,7 @@ function removeProduct(id, res, req) {
       productCollection.splice(productIndex, 1)
       deletedProduct = true;
     }
-  })
+  })//move
   if (deletedProduct === false) {
     deletedProduct = true;
     res.render('pnew', {
@@ -42,7 +43,6 @@ function findId(id) {
   productCollection.map(element => {
     if (element.id === id) {
       elem = element
-      getId = true
     }
   })
   return elem;
@@ -54,10 +54,10 @@ function update(id, req, res) {
       element.name = req.body.name;
       element.price = req.body.price;
       element.inventory = req.body.inventory;
-      element.id = req.body.id;
       itemFound = true;
     }
   })
+  //move
   if (itemFound === false) {
     itemfound = true;
     res.redirect(`/products/${title}/edit`)
@@ -68,7 +68,7 @@ function update(id, req, res) {
 
 module.exports = {
   allProducts,
-  productIdGenerator,
+  // productIdGenerator,
   addProduct,
   findId,
   update,

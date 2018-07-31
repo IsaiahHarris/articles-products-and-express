@@ -1,6 +1,3 @@
-const productData = require('../db/productDb');
-const articleData = require('../db/articlesDb');
-
 let errorMessage;
 
 function validateArticleInfo(req, res, next) {
