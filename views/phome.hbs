@@ -5,18 +5,18 @@
     </form>
     <h1 id='product-h1'>Products</h1>
     <form action="/">
-      <input type="submit" value="HOME" class='home-button'>
+      <input type="submit" value="HOME" class='phome-button'>
     </form>
   </div>
   <div class='product-entries-container'>
-    {{#each products}}
+    {{#each product}}
     <div id='products-entries'>
-      <form action="/products/{{id}}">
-        <input type="submit" value="{{id}}" class='ptitle'>
+      <form action="/products/{{this.id}}">
+        <input type="submit" value="{{this.id}}" class='ptitle'>
       </form>
-      <h5>NAME: {{name}}</h5>
-      <p id='product-body'>PRICE: {{price}}</p>
-      <p>INVENTORY: {{inventory}}</p>
+      <h5>NAME: {{this.name}}</h5>
+      <p id='product-body'>PRICE: {{this.price}}</p>
+      <p>INVENTORY: {{this.inventory}}</p>
     </div>
     {{/each}}
   </div>

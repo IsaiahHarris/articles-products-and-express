@@ -133,6 +133,7 @@ color:white
   align-items: center;
   justify-content: space-around;
   color:black;
+  font-size: 18px;
 }
 #product-body{
   text-overflow:ellipsis;
@@ -209,6 +210,12 @@ color:white
 .home-button{
   color:white;
   background-color: black;
+  height: 20px;
+  font-size:15px;
+}
+.phome-button{
+  color:black;
+  background-color: white;
   height: 20px;
   font-size:15px;
 }
