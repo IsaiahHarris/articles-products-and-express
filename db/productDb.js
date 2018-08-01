@@ -1,13 +1,9 @@
 let id = 1;
-const productCollection = [{ name: 'shoe', price: '50', inventory: '5'}]
+const productCollection = [{ name: 'shoe', price: '50', inventory: '5', id : '0'}]
 let errorMessage = 'ITEM DOESNT EXIST, do you want to add it?';
 function allProducts() {
   return productCollection;
 }
-
-// function productIdGenerator() {
-//   return Math.floor(Math.random() * 6) + 1
-// }
 
 function addProduct(req) {
   let newProduct = {};
@@ -26,7 +22,7 @@ function removeProduct(id, res, req) {
       productCollection.splice(productIndex, 1)
       deletedProduct = true;
     }
-  })//move
+  })
   if (deletedProduct === false) {
     deletedProduct = true;
     res.render('pnew', {
