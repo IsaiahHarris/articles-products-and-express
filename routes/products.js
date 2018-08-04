@@ -3,32 +3,32 @@ const router = express.Router();
 const db = require('../db/knex');
 const validation = require('../middleware/payloadValidation');
 
-router.get('/', (req,res)=>{
+router.get('/', (req, res) => {
   db.select().from('products')
-  .then(result=>{
-    res.render('phome',{
-      product: result
-    });
-  })
-  .catch(err=>{
-    console.log(err);
-    res.send('there has been an error');
-  })
+    .then(result => {
+      res.render('phome', {
+        product: result
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.send('there has been an error');
+    })
 });
 
-router.post('/', validation.validateProductInfo, (req,res)=>{
+router.post('/', validation.validateProductInfo, (req, res) => {
   const data = req.body;
   return db('products').insert({
-    name: data.name, 
-    price: data.price, 
-    inventory:data.inventory, 
+    name: data.name,
+    price: data.price,
+    inventory: data.inventory,
   })
-  .then(result=>{
-    res.redirect('products')
-  })
+    .then(result => {
+      res.redirect('/products')
+    })
 });
 
-router.put('/:id', (req,res)=>{
+router.put('/:id', (req, res) => {
   const data = req.body;
   const id = req.params.id;
   return db('products').where('id', '=', id).update({
@@ -37,54 +37,59 @@ router.put('/:id', (req,res)=>{
     price: data.price,
     inventory: data.inventory,
   })
-  .then(result=>{
-    return res.json(result.rows)
-  })
-  .catch(err=>{
-    console.log(err);
-    res.send('there has been an error');
-  })
+    .then(result => {
+      res.redirect(`/products/${id}`)
+    })
+    .catch(err => {
+      console.log(err);
+      res.send('there has been an error');
+    })
 });
 
-router.delete('/:id', (req,res)=>{
+router.delete('/:id', (req, res) => {
   const id = req.params.id;
   return db.raw('SELECT * FROM products WHERE id = ?', [id])
     .then(result => {
-      if (!result || !result.rowCount) {
-        return res.status(404).json({ "message": "Product under that id could not be found" })
-      }
-      return result;
-  })
-  .then(result=>{
-    return db('products').where('id', '=', id).del();
-  })
-  .then(result=>{
-    return res.json({"message": `product ${id} has been successfully deleted`});
-  })
-  .catch(err=>{
-    console.log(err);
-    res.send('there has been an error');
-  })
+      return db('products').where('id', id).del()
+    })
+    .then(result=>{
+      res.redirect('/products')
+    })
+    .catch(err => {
+      console.log(err);
+      res.send('there has been an error');
+    })
 });
-router.get('/new', (req,res)=>{
+
+router.get('/new', (req, res) => {
   res.render('pnew');
 });
 
-router.get('/:id',(req,res)=>{
+router.get('/:id', (req, res) => {
   const id = req.params.id;
   return db.select().from('products').where('id', id)
-  .then(result=>{
-    console.log(result);
-    res.render('product',{
-      product: result[0]
+    .then(result => {
+      res.render('product', {
+        product: result[0]
+      })
     })
-  })
-  .catch(err=>{
-    return res.send('there has been an error')
-  })
+    .catch(err => {
+      return res.send('there has been an error')
+    })
 });
 
-
+router.get('/:id/edit', (req, res) => {
+  const id = req.params.id;
+  db.select().where('id', id).from('products')
+    .then(result => {
+      res.render('pedit', {
+        product: result[0]
+      })
+    })
+    .catch(err=>{
+      res.send('there has been an error')
+    })
+})
 
 module.exports = router;
 
