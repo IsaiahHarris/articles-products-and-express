@@ -1,64 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/knex');
-const validation = require('../middleware/payloadValidation');
-
+const helpers = require('../routes/helpers');
 router.get('/', (req, res) => {
-  db.select().from('products')
-    .then(result => {
-      res.render('phome', {
-        product: result
-      });
-    })
-    .catch(err => {
-      console.log(err);
-      res.send('there has been an error');
-    })
+  helpers.selectAllProducts(req, res);
 });
 
 router.post('/', (req, res) => {
-  const data = req.body;
-  return db('products').insert({
-    name: data.name,
-    price: data.price,
-    inventory: data.inventory,
-  })
-    .then(result => {
-      res.redirect('/products')
-    })
+  helpers.addProduct(req, res);
 });
 
 router.put('/:id', (req, res) => {
-  const data = req.body;
-  const id = req.params.id;
-  return db('products').where('id', '=', id).update({
-    id: id,
-    name: data.name,
-    price: data.price,
-    inventory: data.inventory,
-  })
-    .then(result => {
-      res.redirect(`/products/${id}`)
-    })
-    .catch(err => {
-      console.log(err);
-      res.send('there has been an error');
-    })
+  helpers.updateArticle(req, res);
 });
 
 router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  return db.raw('SELECT * FROM products WHERE id = ?', [id])
-    .then(result => {
-      return db('products').where('id', id).del()
-    })
-    .then(result => {
-      res.redirect('/products')
-    })
-    .catch(err => {
-      console.log(err);
-      res.send('there has been an error');
-    })
+  helpers.deleteProduct(req, res);
 });
 
 router.get('/new', (req, res) => {
@@ -66,34 +23,11 @@ router.get('/new', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  const id = req.params.id;
-  return db.select().from('products').where('id', id)
-    .then(result => {
-      if (!result || !result.length) {
-        res.redirect('/products/new')
-      } else {
-        return res.render('product', {
-          product: result[0]
-        })
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      return res.send('there has been an error')
-    })
+  helpers.getProductById(req, res);
 });
 
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id;
-  db.select().where('id', id).from('products')
-    .then(result => {
-      res.render('pedit', {
-        product: result[0]
-      })
-    })
-    .catch(err => {
-      res.send('there has been an error')
-    })
+ helpers.getProductEditPage(req,res);
 })
 
 module.exports = router;

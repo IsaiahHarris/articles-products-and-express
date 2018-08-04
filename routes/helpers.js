@@ -69,13 +69,101 @@ function deleteArticle(req, res) {
     })
 }
 
-function editByTitleArticles(req, res) {
+function getArticleEditPage(req, res) {
   const title = encodeURI(req.params.utitle);
   db.select().where('title', title).from('articles')
     .then(result => {
       res.render('edit', {
         article: result[0]
       })
+    })
+}
+
+function selectAllProducts(req,res){
+  db.select().from('products')
+    .then(result => {
+      res.render('phome', {
+        product: result
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.send('there has been an error');
+    })
+}
+
+function addProduct(req,res){
+  const data = req.body;
+  return db('products').insert({
+    name: data.name,
+    price: data.price,
+    inventory: data.inventory,
+  })
+    .then(result => {
+      res.redirect('/products')
+    })
+}
+
+function updateArticle(req,res){
+  const data = req.body;
+  const id = req.params.id;
+  return db('products').where('id', '=', id).update({
+    id: id,
+    name: data.name,
+    price: data.price,
+    inventory: data.inventory,
+  })
+    .then(result => {
+      res.redirect(`/products/${id}`)
+    })
+    .catch(err => {
+      console.log(err);
+      res.send('there has been an error');
+    })
+}
+
+function deleteProduct(req,res){
+  const id = req.params.id;
+  return db.raw('SELECT * FROM products WHERE id = ?', [id])
+    .then(result => {
+      return db('products').where('id', id).del()
+    })
+    .then(result => {
+      res.redirect('/products')
+    })
+    .catch(err => {
+      console.log(err);
+      res.send('there has been an error');
+    })
+}
+function getProductById(req,res){
+  const id = req.params.id;
+  return db.select().from('products').where('id', id)
+    .then(result => {
+      if (!result || !result.length) {
+        res.redirect('/products/new')
+      } else {
+        return res.render('product', {
+          product: result[0]
+        })
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      return res.send('there has been an error')
+    })
+}
+
+function getProductEditPage(req,res){
+  const id = req.params.id;
+  db.select().where('id', id).from('products')
+    .then(result => {
+      res.render('pedit', {
+        product: result[0]
+      })
+    })
+    .catch(err => {
+      res.send('there has been an error')
     })
 }
 
@@ -86,5 +174,11 @@ module.exports = {
   addAnArticle,
   updateArticle,
   deleteArticle,
-  editByTitleArticles
+  getArticleEditPage,
+  selectAllProducts,
+  addProduct,
+  updateArticle,
+  deleteProduct,
+  getProductById,
+  getProductEditPage
 }
