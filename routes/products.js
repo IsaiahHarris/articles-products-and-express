@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.post('/', validation.validateProductInfo, (req, res) => {
+router.post('/', (req, res) => {
   const data = req.body;
   return db('products').insert({
     name: data.name,
@@ -52,7 +52,7 @@ router.delete('/:id', (req, res) => {
     .then(result => {
       return db('products').where('id', id).del()
     })
-    .then(result=>{
+    .then(result => {
       res.redirect('/products')
     })
     .catch(err => {
@@ -69,11 +69,16 @@ router.get('/:id', (req, res) => {
   const id = req.params.id;
   return db.select().from('products').where('id', id)
     .then(result => {
-      res.render('product', {
-        product: result[0]
-      })
+      if (!result || !result.length) {
+        res.redirect('/products/new')
+      } else {
+        return res.render('product', {
+          product: result[0]
+        })
+      }
     })
     .catch(err => {
+      console.log(err);
       return res.send('there has been an error')
     })
 });
@@ -86,7 +91,7 @@ router.get('/:id/edit', (req, res) => {
         product: result[0]
       })
     })
-    .catch(err=>{
+    .catch(err => {
       res.send('there has been an error')
     })
 })
