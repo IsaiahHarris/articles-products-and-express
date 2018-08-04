@@ -13,14 +13,18 @@ CREATE TABLE articles (
   author varchar(255) NOT NULL,
   body varchar(1024) NOT NULL,
   title varchar(255) NOT NULL,
-  urlTitle varchar (255)
+  urlTitle varchar (255),
+  created_at timestamp NOT NULL now(),
+  updated_at timestamp NOT NULL now()
 );
 
 CREATE TABLE products (
   id serial NOT NULL PRIMARY KEY,
   name varchar(255) NOT NULL,
   inventory integer,
-  price decimal(8,2) 
+  price decimal(8,2),
+  created_at timestamp NOT NULL now(),
+  updated_at timestamp NOT NULL now()
 );
 
 INSERT INTO articles VALUES(
