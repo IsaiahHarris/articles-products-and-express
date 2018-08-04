@@ -18,6 +18,7 @@ router.post('/', (req, res) => {
     title: data.title,
     body: data.body,
     author: data.author,
+    urltitle: encodeURI(data.title)
   })
     .then(result => {
       res.redirect('/articles')
@@ -25,13 +26,14 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:title', (req, res) => {
-  const title = req.params.title;
+  const title = encodeURI(req.params.title);
   const data = req.body;
 
   return db('articles').where('title', title).update({
     title: data.title,
     body: data.body,
-    author: data.author
+    author: data.author,
+    urltitle: encodeURI(data.title)
   })
     .then(result => {
       res.redirect(`/articles/${data.title}`)
@@ -39,8 +41,8 @@ router.put('/:title', (req, res) => {
 });
 
 router.delete('/:title', (req, res) => {
-  const title = req.params.title;
-  helpers.selectArticles(title)
+  const title = encodeURI(req.params.title);
+  return helpers.selectArticles(title)
     .then(result => {
       return db('articles').where('title', title).del()
     })
@@ -55,12 +57,11 @@ router.delete('/:title', (req, res) => {
 router.get('/new', (req, res) => {
   res.render('new')
 })
-router.get('/:title', (req, res) => {
-  const title = req.params.title;
-  console.log(title);
+router.get('/:utitle', (req, res) => {
+  const title = encodeURI(req.params.utitle);
   // console.log(helpers.selectArticles(title))
 
-  helpers.selectArticles(title)
+  return helpers.selectArticles(title)
     .then(result => {
       console.log(result);
       if (!result || !result.length) {
@@ -73,8 +74,8 @@ router.get('/:title', (req, res) => {
     })
 })
 
-router.get('/:title/edit', (req, res) => {
-  const title = req.params.title;
+router.get('/:utitle/edit', (req, res) => {
+  const title = encodeURI(req.params.utitle);
   db.select().where('title', title).from('articles')
     .then(result => {
       res.render('edit', {

@@ -11,12 +11,12 @@
 <div class = 'article-entries-container'>
   {{#each articles}}
   <div id='articles-entries'>  
-    <form action="/articles/{{this.title}}">
+    <form action="/articles/{{this.urltitle}}">
     <input type="submit" value="{{this.title}}" class = 'atitle'>
     </form> 
   <h5>Author: {{this.author}}</h5>
   <p class = 'article-body'>BODY: {{this.body}}</p>
-  <p>Url Title: {{this.urlTitle}}</p>
+  <p>Url Title: {{this.urltitle}}</p>
   </div>
   {{/each}}
 </div>
