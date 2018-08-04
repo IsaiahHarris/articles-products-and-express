@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db/knex');
 const helpers = require('../routes/helpers');
+const payloadValidation = require('../middleware/payloadValidation');
+
 router.get('/', (req, res) => {
   helpers.selectAllProducts(req, res);
 });
 
-router.post('/', (req, res) => {
+router.post('/', payloadValidation.validateProductInfo, (req, res) => {
   helpers.addProduct(req, res);
 });
 

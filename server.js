@@ -5,7 +5,7 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser')
 const articlesRoute = require('./routes/articles');
 const productsRoute = require('./routes/products');
-// const payloadValidation = require('./middleware/payloadValidation');
+
 const PORT = process.env.PORT || 8080;
 
 app.use(express.static('./public'));
@@ -19,8 +19,7 @@ app.use(methodOverride((req, res) => {
   }
 }));
 
-// app.use(payloadValidation.validateProductInfo);
-// app.use(payloadValidation.validateArticleInfo);
+
 app.get('/', (req, res, next) => {
   res.render('landingPage');
 })

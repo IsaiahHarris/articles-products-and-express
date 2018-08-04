@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const helpers = require('./helpers')
+const payloadValidation = require('../middleware/payloadValidation');
 
 router.get('/', (req, res) => {
   helpers.getAllArticles(req,res);
 });
 
-router.post('/', (req, res) => {
+router.post('/', payloadValidation.validateArticleInfo, (req, res) => {
   helpers.addAnArticle(req, res);
 });
 
