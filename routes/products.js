@@ -12,7 +12,7 @@ router.post('/', payloadValidation.validateProductInfo, (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  helpers.updateArticle(req, res);
+  helpers.updateProduct(req, res);
 });
 
 router.delete('/:id', (req, res) => {

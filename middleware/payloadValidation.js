@@ -1,17 +1,58 @@
-let errorMessage;
+let errorMessage = '';
 
 function validateArticleInfo(req, res, next) {
-  let success = false;
-  if (!req.body.title || !req.body.author || !req.body.body) {
-    errorMessage = 'ALL FIELDS MUST BE FILLED OUT';
-  } else {
-    success = true;
-  }
-  if (success === false) {
+  let title = req.body.title;
+  let author = req.body.author;
+  let body = req.body.body;
+  let noTitleMessage = 'Missing Title';
+  let noAuthorMessage = 'Missing Author';
+  let noBodyMessage = 'Missing Body';
+  if (!title) {
     res.render('new', {
-      errorMessage: errorMessage
+      noTitle: true,
+      noTitleMessage: noTitleMessage
     })
-  } else {
+  }else if(!title && !body){
+    res.render('new', {
+      noBody :true,
+      noBodyMessage: noBodyMessage,
+      noTitle: true,
+      noTitleMessage: noTitleMessage
+    })
+  }else if(!title && !author){
+    res.render('new', {
+      noAuthor :true,
+      noAuthorMessage: noAuthorMessage,
+      noTitle: true,
+      noTitleMessage: noTitleMessage
+    })
+  }else if(!body){
+    res.render('new', {
+     noBody: true,
+     noBodyMessage: noBodyMessage
+    })
+  }else if(!author && !body){
+    res.render('new', {
+      noAuthor: true,
+      noAuthorMessage: noAuthorMessage,
+      noBody:true,
+      noBodyMessage: noBodyMessage
+     })
+  }else if(!author){
+    res.render('new',{
+      noAuthor:true,
+      noAuthorMessage: noAuthorMessage
+    })
+  }else if(!title && !body && !noAuthor){
+    res.render('new', {
+      noBody :true,
+      noBodyMessage: noBodyMessage,
+      noTitle: true,
+      noTitleMessage: noTitleMessage,
+      noAuthor: true,
+      noAuthorMessage: true
+    })
+  }else {
     next();
   }
 }

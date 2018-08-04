@@ -5,11 +5,20 @@
 <form enctype="application/x-www-form-urlencoded" method="POST" action="/articles">
   <div>TITLE</div>
   <input type="text" name="title" class='input' placeholder="Title" value="{{article.title}}" value="{{articleTitle}}">
+  {{#if noTitle}}
+  <div>{{noTitleMessage}}</div>
+  {{/if}}
   <div>AUTHOR</div>
-  <input type="text" name="author" placeholder="Author" class='input'>
+  <input type="text" name="author" placeholder="Author" class='input'> 
+  {{#if noAuthor}}
+  <div>{{noAuthorMessage}}</div>
+  {{/if}}
   <div>BODY</div>
-  <input type="text" name="body" placeholder="Body" class="input">
+  <input type="text" name="body" placeholder="Body" class="input"> 
+  {{#if noBody}}
+  <div>{{noBodyMessage}}</div>
+  {{/if}}
   <div>ADD ARTICLE</div>
   <input type="submit" class='submit' value="Submit">
-  <div>{{errorMessage}}</div>
+
 </form>

@@ -38,8 +38,12 @@ function addAnArticle(req, res) {
     .then(result => {
       res.redirect('/articles')
     })
+    .catch(err=>{
+      console.log(err);
+    })
 }
 function updateArticle(req, res) {
+  console.log('getting')
   const title = encodeURI(req.params.title);
   const data = req.body;
 
@@ -52,11 +56,14 @@ function updateArticle(req, res) {
     .then(result => {
       res.redirect(`/articles/${data.title}`)
     })
+    .catch(err=>{
+      console.log(err);
+    })
 }
 
 function deleteArticle(req, res) {
-  const title = encodeURI(req.params.title);
-  db.select().from('articles').where('urltitle', title)
+  const title = req.params.title;
+  db.select().from('articles').where('title', title)
     .then(result => {
     return db('articles').where('title', title).del()
   })
@@ -104,7 +111,8 @@ function addProduct(req,res){
     })
 }
 
-function updateArticle(req,res){
+function updateProduct(req,res){
+  console.log('second');
   const data = req.body;
   const id = req.params.id;
   return db('products').where('id', '=', id).update({
@@ -177,7 +185,7 @@ module.exports = {
   getArticleEditPage,
   selectAllProducts,
   addProduct,
-  updateArticle,
+  updateProduct,
   deleteProduct,
   getProductById,
   getProductEditPage
