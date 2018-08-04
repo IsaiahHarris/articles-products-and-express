@@ -1,4 +1,7 @@
 <h1>Input New Article</h1>
+<form action="/articles">
+  <input type="submit" value="Back to Articles" class='home-button'>
+</form>
 <form enctype="application/x-www-form-urlencoded" method="POST" action="/articles">
   <div>TITLE</div>
   <input type="text" name="title" class='input' placeholder="Title" value="{{article.title}}" value="{{articleTitle}}">
@@ -7,6 +10,6 @@
   <div>BODY</div>
   <input type="text" name="body" placeholder="Body" class="input">
   <div>ADD ARTICLE</div>
-  <input type="submit" class = 'submit' value="Submit">
+  <input type="submit" class='submit' value="Submit">
   <div>{{errorMessage}}</div>
 </form>
