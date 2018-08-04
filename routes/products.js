@@ -4,16 +4,17 @@ const db = require('../db/knex');
 const validation = require('../middleware/payloadValidation');
 
 router.get('/', (req,res)=>{
-  const data = req.body;
-  return db.raw('SELECT * FROM products')
+  db.select().from('products')
   .then(result=>{
-    return res.json(result.rows);
+    res.render('phome',{
+      product: result
+    });
   })
   .catch(err=>{
     console.log(err);
     res.send('there has been an error');
   })
-})
+});
 
 router.post('/', validation.validateProductInfo, (req,res)=>{
   const data = req.body;
@@ -23,10 +24,7 @@ router.post('/', validation.validateProductInfo, (req,res)=>{
     inventory:data.inventory, 
   })
   .then(result=>{
-    return res.json({"message": "success"});
-  })
-  .then(result=>{
-    return res.json(result.rows);
+    res.redirect('products')
   })
 });
 
@@ -46,7 +44,8 @@ router.put('/:id', (req,res)=>{
     console.log(err);
     res.send('there has been an error');
   })
-})
+});
+
 router.delete('/:id', (req,res)=>{
   const id = req.params.id;
   return db.raw('SELECT * FROM products WHERE id = ?', [id])
@@ -66,7 +65,25 @@ router.delete('/:id', (req,res)=>{
     console.log(err);
     res.send('there has been an error');
   })
-})
+});
+router.get('/new', (req,res)=>{
+  res.render('pnew');
+});
+
+router.get('/:id',(req,res)=>{
+  const id = req.params.id;
+  return db.select().from('products').where('id', id)
+  .then(result=>{
+    console.log(result);
+    res.render('product',{
+      product: result[0]
+    })
+  })
+  .catch(err=>{
+    return res.send('there has been an error')
+  })
+});
+
 
 
 module.exports = router;
