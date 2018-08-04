@@ -1,60 +1,73 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const router = express.Router();
-const productData = require('../db/productDb');
-const payloadValidation = require('../middleware/payloadValidation');
+const db = require('../db/knex');
+const validation = require('../middleware/payloadValidation');
 
-router.get('/', (req, res, next) => {
-  res.render('phome', {
-    product: productData.allProducts()
+router.get('/', (req,res)=>{
+  const data = req.body;
+  return db.raw('SELECT * FROM products')
+  .then(result=>{
+    return res.json(result.rows);
+  })
+  .catch(err=>{
+    console.log(err);
+    res.send('there has been an error');
   })
 })
 
-router.post('/', payloadValidation.validateProductInfo, (req, res) => {
-  productData.addProduct(req);
-  res.redirect('/products');
-})
+router.post('/', validation.validateProductInfo, (req,res)=>{
+  const data = req.body;
+  return db('products').insert({
+    name: data.name, 
+    price: data.price, 
+    inventory:data.inventory, 
+  })
+  .then(result=>{
+    return res.json({"message": "success"});
+  })
+  .then(result=>{
+    return res.json(result.rows);
+  })
+});
 
-router.put('/:id', (req, res) => {
-  productData.update(req.body.id, req, res);
+router.put('/:id', (req,res)=>{
+  const data = req.body;
+  const id = req.params.id;
+  return db('products').where('id', '=', id).update({
+    id: id,
+    name: data.name,
+    price: data.price,
+    inventory: data.inventory,
+  })
+  .then(result=>{
+    return res.json(result.rows)
+  })
+  .catch(err=>{
+    console.log(err);
+    res.send('there has been an error');
+  })
 })
-
-router.delete('/:id', (req, res) => {
-  productData.removeProduct(req.params.id, res, req)
-})
-
-router.get('/', (req, res) => {
-  res.render('pindex', {
-    products: productData.allProducts()
+router.delete('/:id', (req,res)=>{
+  const id = req.params.id;
+  return db.raw('SELECT * FROM products WHERE id = ?', [id])
+    .then(result => {
+      if (!result || !result.rowCount) {
+        return res.status(404).json({ "message": "Product under that id could not be found" })
+      }
+      return result;
+  })
+  .then(result=>{
+    return db('products').where('id', '=', id).del();
+  })
+  .then(result=>{
+    return res.json({"message": `product ${id} has been successfully deleted`});
+  })
+  .catch(err=>{
+    console.log(err);
+    res.send('there has been an error');
   })
 })
 
-router.get('/new', (req, res) => {
-  res.render('pnew');
-})
-
-router.get('/:id', (req, res) => {
-  let elem = productData.findId(req.params.id);
-  if (elem) {
-    res.render('product', {
-      product: elem
-    })
-  } else {
-    res.render('pnew', {
-      product: req.params
-    })
-  }
-})
-
-router.get('/:id/edit', (req, res) => {
-  let elem = productData.findId(req.params.id);
-  if (elem) {
-    res.render('pedit', {
-      product: elem
-    })
-  } else {
-    res.render('pnew');
-  }
-})
 
 module.exports = router;
+
