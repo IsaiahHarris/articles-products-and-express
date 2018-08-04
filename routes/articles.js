@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/knex');
-
-
+const helpers = require('./helpers')
 
 router.get('/', (req, res) => {
   return db.select().from('articles')
@@ -41,7 +40,7 @@ router.put('/:title', (req, res) => {
 
 router.delete('/:title', (req, res) => {
   const title = req.params.title;
-  return db.raw('SELECT * FROM articles WHERE title = ?', [title])
+  helpers.selectArticles(title)
     .then(result => {
       return db('articles').where('title', title).del()
     })
@@ -58,8 +57,12 @@ router.get('/new', (req, res) => {
 })
 router.get('/:title', (req, res) => {
   const title = req.params.title;
-  return db.select().from('articles').where('title', title)
+  console.log(title);
+  // console.log(helpers.selectArticles(title))
+
+  helpers.selectArticles(title)
     .then(result => {
+      console.log(result);
       if (!result || !result.length) {
         res.redirect('/articles/new')
       } else {
