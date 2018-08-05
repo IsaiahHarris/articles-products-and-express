@@ -8,10 +8,15 @@
   <input type="submit" value="HOME" class = 'home-button'>
   </form>
 </div>
+<div class="search-container">
+  <div id = 'asearchbar' contenteditable="true">Find Article</div>
+  <button id = 'ago'>GO</button>
+</div>
+
 <div class = 'article-entries-container'>
   {{#each articles}}
   <div id='articles-entries'>  
-    <form action="/articles/{{this.id}}">
+    <form action="/articles/{{this.urltitle}}">
     <input type="submit" value="{{this.title}}" class = 'atitle'>
     </form> 
   <h5>Author: {{this.author}}</h5>

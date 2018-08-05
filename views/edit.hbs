@@ -1,7 +1,7 @@
 <div class="editHeader">
   <h1 class='edith1'>Edit Article</h1>
 </div>
-<form enctype="application/x-www-form-urlencoded" method="POST" action="/articles/{{article.id}}">
+<form enctype="application/x-www-form-urlencoded" method="POST" action="/articles/{{article.title}}">
   <input type="hidden" name="_method" value="PUT">
   <div>TITLE</div>
   <input type="text" name="title" value="{{article.title}}" class = 'inputa'>

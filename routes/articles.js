@@ -11,22 +11,22 @@ router.post('/', payloadValidation.validateArticleInfo, (req, res) => {
   helpers.addAnArticle(req, res);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:utitle', (req, res) => {
   helpers.updateArticle(req, res);
 });
 
-router.delete('/:id/', (req, res) => {
+router.delete('/:utitle/', (req, res) => {
   helpers.deleteArticle(req, res);
 })
 
 router.get('/new', (req, res) => {
   res.render('new')
 })
-router.get('/:id/', (req, res) => {
+router.get('/:utitle', (req, res) => {
   helpers.selectByTitleArticles(req, res);
 })
 
-router.get('/:id/edit', (req, res) => {
+router.get('/:utitle/edit', (req, res) => {
   helpers.getArticleEditPage(req, res);
 })
 
