@@ -4,7 +4,7 @@
 </form>
 <form enctype="application/x-www-form-urlencoded" method="POST" action="/articles">
   <div>TITLE</div>
-  <input type="text" name="title" class='input' placeholder="Title" value="{{article.title}}" value="{{articleTitle}}">
+  <input type="text" name="title" class='input' placeholder="Title" value="{{article.urltitle}}" value="{{articleTitle}}">
   {{#if noTitle}}
   <div>{{noTitleMessage}}</div>
   {{/if}}
