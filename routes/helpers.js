@@ -1,8 +1,8 @@
 const db = require('../db/knex');
 
 function selectByTitleArticles(req, res) {
-  const title = encodeURI(req.params.utitle);
-  return db.select().from('articles').where('urltitle', title)
+  const id = req.params.id;
+  return db.select().from('articles').where('id', id)
     .then(result => {
       console.log(result);
       if (!result || !result.length) {
@@ -44,17 +44,17 @@ function addAnArticle(req, res) {
 }
 function updateArticle(req, res) {
   console.log('getting')
-  const title = encodeURI(req.params.title);
+  const id = req.params.id;
   const data = req.body;
 
-  return db('articles').where('title', title).update({
+  return db('articles').where('id', id).update({
     title: data.title,
     body: data.body,
     author: data.author,
     urltitle: encodeURI(data.title)
   })
     .then(result => {
-      res.redirect(`/articles/${data.title}`)
+      res.redirect(`/articles/${id}`)
     })
     .catch(err=>{
       console.log(err);
@@ -62,10 +62,10 @@ function updateArticle(req, res) {
 }
 
 function deleteArticle(req, res) {
-  const title = req.params.title;
-  db.select().from('articles').where('title', title)
+  const id = req.params.id;
+  db.select().from('articles').where('id', id)
     .then(result => {
-    return db('articles').where('title', title).del()
+    return db('articles').where('id', id).del()
   })
     .then(result => {
       res.redirect('/articles')
@@ -77,8 +77,8 @@ function deleteArticle(req, res) {
 }
 
 function getArticleEditPage(req, res) {
-  const title = encodeURI(req.params.utitle);
-  db.select().where('title', title).from('articles')
+  const id = req.params.id;
+  db.select().where('id', id).from('articles')
     .then(result => {
       res.render('edit', {
         article: result[0]

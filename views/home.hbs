@@ -11,7 +11,7 @@
 <div class = 'article-entries-container'>
   {{#each articles}}
   <div id='articles-entries'>  
-    <form action="/articles/{{this.urltitle}}">
+    <form action="/articles/{{this.id}}">
     <input type="submit" value="{{this.title}}" class = 'atitle'>
     </form> 
   <h5>Author: {{this.author}}</h5>
