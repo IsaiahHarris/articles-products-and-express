@@ -5,7 +5,10 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser')
 const articlesRoute = require('./routes/articles');
 const productsRoute = require('./routes/products');
-
+const time = require('express-timestamp');
+const fs = require('fs');
+const logger = require('morgan');
+const path = require('path');
 const PORT = process.env.PORT || 8080;
 
 app.use(express.static('./public'));
@@ -18,7 +21,13 @@ app.use(methodOverride((req, res) => {
     return method;
   }
 }));
+const accessLogStream = fs.createWriteStream(path.join(__dirname, './logs/logs.log'), {flags: 'a'})
 
+logger.token('date', function(){
+  return new Date().toISOString()
+})
+
+app.use(logger({format: ":method :url :date[iso]", stream: accessLogStream}))
 
 app.get('/', (req, res, next) => {
   res.render('landingPage');
