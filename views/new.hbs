@@ -19,6 +19,9 @@
   <div>{{noBodyMessage}}</div>
   {{/if}}
   <div>ADD ARTICLE</div>
+  {{#if aAlreadyExists}}
+  <div>{{alreadyExists}}</div>
+  {{/if}}
   <input type="submit" class='submit' value="Submit">
 
 </form>

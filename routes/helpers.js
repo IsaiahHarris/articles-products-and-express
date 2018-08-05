@@ -175,6 +175,11 @@ function getProductEditPage(req,res){
     })
 }
 
+function duplicate(req,res){
+  const item = encodeURI(req.title)
+  return db.select().from('articles').where('urltitle', item);
+}
+
 module.exports = {
   selectByTitleArticles,
   selectProducts,
@@ -188,5 +193,6 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getProductById,
-  getProductEditPage
+  getProductEditPage,
+  duplicate
 }
