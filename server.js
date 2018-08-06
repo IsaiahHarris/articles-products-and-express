@@ -5,8 +5,12 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser')
 const articlesRoute = require('./routes/articles');
 const productsRoute = require('./routes/products');
-// const payloadValidation = require('./middleware/payloadValidation');
+const time = require('express-timestamp');
+const fs = require('fs');
+const logger = require('morgan');
+const path = require('path');
 const PORT = process.env.PORT || 8080;
+const analyticsTracker = require('./middleware/analytics')
 
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,8 +23,13 @@ app.use(methodOverride((req, res) => {
   }
 }));
 
-// app.use(payloadValidation.validateProductInfo);
-// app.use(payloadValidation.validateArticleInfo);
+
+logger.token('date', function(){
+  return new Date().toISOString()
+})
+
+app.use(logger({format: ":method :url :date[iso]", stream: analyticsTracker.accessLogStream()}))
+
 app.get('/', (req, res, next) => {
   res.render('landingPage');
 })

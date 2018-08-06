@@ -1,14 +1,17 @@
 <h1>Product</h1>
+  <form action="/products">
+  <input type="submit" value="Back to Products" class = 'home-button'>
+  </form>
 <h2>{{product.id}}</h2>
 <h2>{{product.name}}</h2>
 <h2>{{product.inventory}}</h2>
 <h2>{{product.price}}</h2>
 
-<form action="/product/{{product.id}}/edit" method="GET" enctype="application/x-www-form-urlencoded">
+<form action="/products/{{product.id}}/edit" method="GET" enctype="application/x-www-form-urlencoded">
 <input type="submit" value="edit item">
 </form>
 
-<form action='/product/{{product.id}}' method="POST" enctype="application/x-www-form-urlencoded">
+<form action='/products/{{product.id}}' method="POST" enctype="application/x-www-form-urlencoded">
 <input type="hidden" name = "_method" value="DELETE">
 <input type="submit" value="delete item">
 </form>

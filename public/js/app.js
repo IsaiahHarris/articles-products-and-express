@@ -1,3 +1,5 @@
+
+
 let articleBody = document.getElementsByClassName('article-body');
 
 for (let i = 0; i < articleBody.length; i++) {
@@ -12,3 +14,9 @@ function switchBody() {
     this.className = 'article-body'
   }
 }
+
+// let goButton = document.getElementById('ago')
+
+// goButton.addEventListener('click',(req,res)=>{
+//   console.log(req);
+// })

@@ -1,60 +1,35 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const router = express.Router();
-const productData = require('../db/productDb');
+const helpers = require('../routes/helpers');
 const payloadValidation = require('../middleware/payloadValidation');
 
-router.get('/', (req, res, next) => {
-  res.render('phome', {
-    product: productData.allProducts()
-  })
-})
+router.get('/', (req, res) => {
+  helpers.selectAllProducts(req, res);
+});
 
 router.post('/', payloadValidation.validateProductInfo, (req, res) => {
-  productData.addProduct(req);
-  res.redirect('/products');
-})
+  helpers.addProduct(req, res);
+});
 
 router.put('/:id', (req, res) => {
-  productData.update(req.body.id, req, res);
-})
+  helpers.updateProduct(req, res);
+});
 
 router.delete('/:id', (req, res) => {
-  productData.removeProduct(req.params.id, res, req)
-})
-
-router.get('/', (req, res) => {
-  res.render('pindex', {
-    products: productData.allProducts()
-  })
-})
+  helpers.deleteProduct(req, res);
+});
 
 router.get('/new', (req, res) => {
   res.render('pnew');
-})
+});
 
 router.get('/:id', (req, res) => {
-  let elem = productData.findId(req.params.id);
-  if (elem) {
-    res.render('product', {
-      product: elem
-    })
-  } else {
-    res.render('pnew', {
-      product: req.params
-    })
-  }
-})
+  helpers.getProductById(req, res);
+});
 
 router.get('/:id/edit', (req, res) => {
-  let elem = productData.findId(req.params.id);
-  if (elem) {
-    res.render('pedit', {
-      product: elem
-    })
-  } else {
-    res.render('pnew');
-  }
+ helpers.getProductEditPage(req,res);
 })
 
 module.exports = router;
+
