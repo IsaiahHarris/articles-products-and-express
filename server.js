@@ -21,7 +21,10 @@ app.use(methodOverride((req, res) => {
     return method;
   }
 }));
-const accessLogStream = fs.createWriteStream(path.join(__dirname, './logs/logs.log'), {flags: 'a'})
+
+const now = new Date();
+const logfile_name = now.getFullYear() + "-"+ now.getMonth() + "-" + now.getDate() +'.log'
+const accessLogStream = fs.createWriteStream(path.join(__dirname, `./logs/${logfile_name}`), {flags: 'a'})
 
 logger.token('date', function(){
   return new Date().toISOString()
