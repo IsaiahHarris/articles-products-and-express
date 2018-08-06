@@ -181,7 +181,7 @@ function duplicate(req,res){
 }
 function duplicateProduct(req,res){
   const item = req.name;
-  return db.select().from('products').where('id', item);
+  return db.select().from('products').where('name', item);
 }
 module.exports = {
   selectByTitleArticles,
