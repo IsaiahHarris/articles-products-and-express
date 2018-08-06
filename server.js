@@ -21,12 +21,10 @@ app.use(methodOverride((req, res) => {
   }
 }));
 
-
 logger.token('date', function(){
   return new Date().toISOString()
 })
 
-// app.use(checkHeaders.checkHeader(req,res))
 app.use(logger({format: ":method :url :date[iso]", stream: analyticsTracker.accessLogStream()}))
 
 app.get('/' , (req, res, next) => {
