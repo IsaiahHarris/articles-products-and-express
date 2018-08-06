@@ -1,21 +1,18 @@
 <h1>Input New Article</h1>
 <form action="/articles">
-  <input type="submit" value="Back to Articles" class='home-button'>
+  <input type="submit" value="Back to Articles" class='ahome-button'>
 </form>
 <form enctype="application/x-www-form-urlencoded" method="POST" action="/articles">
   <div>TITLE</div>
-  <input type="text" name="title" class='input' placeholder="Title" value="{{article.urltitle}}" value="{{articleTitle}}">
-  {{#if noTitle}}
+  <input type="text" name="title" class='input' placeholder="Title" value="{{article.urltitle}}" value="{{articleTitle}}"> {{#if noTitle}}
   <div>{{noTitleMessage}}</div>
   {{/if}}
   <div>AUTHOR</div>
-  <input type="text" name="author" placeholder="Author" class='input'>    
-  {{#if noAuthor}}
+  <input type="text" name="author" placeholder="Author" class='input'> {{#if noAuthor}}
   <div>{{noAuthorMessage}}</div>
   {{/if}}
   <div>BODY</div>
-  <input type="text" name="body" placeholder="Body" class="input"> 
-  {{#if noBody}}
+  <input type="text" name="body" placeholder="Body" class="input"> {{#if noBody}}
   <div>{{noBodyMessage}}</div>
   {{/if}}
   <div>ADD ARTICLE</div>

@@ -10,6 +10,7 @@ const fs = require('fs');
 const logger = require('morgan');
 const path = require('path');
 const PORT = process.env.PORT || 8080;
+const analyticsTracker = require('./middleware/analytics')
 
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,15 +23,12 @@ app.use(methodOverride((req, res) => {
   }
 }));
 
-const now = new Date();
-const logfile_name = now.getFullYear() + "-"+ now.getMonth() + "-" + now.getDate() +'.log'
-const accessLogStream = fs.createWriteStream(path.join(__dirname, `./logs/${logfile_name}`), {flags: 'a'})
 
 logger.token('date', function(){
   return new Date().toISOString()
 })
 
-app.use(logger({format: ":method :url :date[iso]", stream: accessLogStream}))
+app.use(logger({format: ":method :url :date[iso]", stream: analyticsTracker.accessLogStream()}))
 
 app.get('/', (req, res, next) => {
   res.render('landingPage');

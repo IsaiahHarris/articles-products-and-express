@@ -179,7 +179,10 @@ function duplicate(req,res){
   const item = encodeURI(req.title)
   return db.select().from('articles').where('urltitle', item);
 }
-
+function duplicateProduct(req,res){
+  const item = req.name;
+  return db.select().from('products').where('id', item);
+}
 module.exports = {
   selectByTitleArticles,
   selectProducts,
@@ -194,5 +197,6 @@ module.exports = {
   deleteProduct,
   getProductById,
   getProductEditPage,
-  duplicate
+  duplicate,
+  duplicateProduct
 }

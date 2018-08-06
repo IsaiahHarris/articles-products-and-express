@@ -2,10 +2,6 @@ let errorMessage = '';
 
 const helpers = require('../routes/helpers');
 
-
-
-
-
 function validateArticleInfo(req, res, next) {
   let title = req.body.title;
   let author = req.body.author;
@@ -42,19 +38,33 @@ function validateArticleInfo(req, res, next) {
 };
 
 function validateProductInfo(req, res, next) {
-  let success = false;
-  if (!req.body.name || isNaN(parseInt(req.body.price)) || !req.body.price || isNaN(parseInt(req.body.inventory)) || !req.body.inventory) {
-    errorMessage = 'ALL FIELDS MUST BE FILLED OUT, PRICE AND INVENTORY MUST BE NUMBERS';
-  } else {
-    success = true;
-  }
-  if (success === false) {
-    res.render('pnew', {
-      errorMessage: errorMessage
+  console.log(req.body);
+  helpers.duplicateProduct(req.body)
+    .then(result => {
+      if (result.length) {
+        return res.render('pnew', {
+          pAlreadyExists: true,
+          pAlreadyExistsMessage: 'Product under that title already exists'
+        })
+      } else if (!req.body.name) {
+        return res.render('pnew', {
+          noName: true,
+          noNameMessage: 'Missing Name'
+        })
+      } else if (!req.body.inventory || isNaN(req.body.inventory)) {
+        res.render('pnew', {
+          noInventory: true,
+          noInventoryMessage: 'Inventory Must Be Present And A Number'
+        })
+      } else if (!req.body.price || isNaN(req.body.price)) {
+        return res.render('pnew', {
+          noPrice: true,
+          noPriceMessage: 'Price Must Be Present And A Number',
+        })
+      } else {
+        next();
+      }
     })
-  } else {
-    next();
-  }
 }
 
 module.exports = {

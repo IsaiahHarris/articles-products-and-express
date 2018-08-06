@@ -1,15 +1,51 @@
-<h1>Input New Product</h1>
-  <form action="/products">
-  <input type="submit" value="Back to Products" class = 'home-button'>
-  </form>
+<div class="container">
+  <div class="row justify-content-center my-4">
+    <div class="col-12 text-center">
+      <h2>Input New Product</h2>
+    </div>
+
+    <div class="col-10 text-center">
+      <form action="/products">
+        <input type="submit" value="Back to Products" class='phome-button'>
+      </form>
+    </div>
+  </div>
+</div>
+
 <form enctype="application/x-www-form-urlencoded" method="POST" action="/products">
-  <div>NAME</div>
-  <input type="text" name="name" value={{product.name}}>
-  <div>PRICE</div>
-  <input type="text" name="price">
-  <div>INVENTORY</div>
-  <input type="text" name="inventory">
-  <div>Submit</div>
-  <input type="submit" value="Submit">
-  <div>{{errorMessage}}</div>
+  <div class="container">
+    <div class="row py-4 justify-content-center formCont">
+      <div class="col-10 mb-3">
+        <div class="inpTitle">NAME:</div>
+        <input type="text" name="name" value="{{product.name}}" class="pnewInp"> {{#if noName}}
+        <div>{{noNameMessage}}</div>
+        {{/if}}
+      </div>
+
+
+      <div class="col-10 mb-3">
+        <div class="inpTitle">PRICE:</div>
+        <input type="text" name="price" class="pnewInp"> {{#if noPrice}}
+        <div>{{noPriceMessage}}</div>
+        {{/if}}
+      </div>
+
+
+      <div class="col-10 mb-3">
+        <div class="inpTitle">INVENTORY:</div>
+        <input type="text" name="inventory" class="pnewInp"> {{#if noInventory}}
+        <div>{{noInventoryMessage}}</div>
+        {{/if}}
+      </div>
+
+      <div class="col-10 text-left">
+
+        <input type="submit" value="Add Product" class="pnewSubmit"> {{#if pAlreadyExists}}
+        <div>{{pAlreadyExistsMessage}}</div>
+        {{/if}}
+      </div>
+
+      <div>{{errorMessage}}</div>
+    </div>
+  </div>
 </form>
