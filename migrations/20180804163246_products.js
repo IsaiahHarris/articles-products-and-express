@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string("name")
     table.decimal("price", 8, 2).notNullable();
-    table.string("inventory").notNullable();
+    table.integer("inventory").notNullable();
     table.timestamps(true,true);
   })
 };
