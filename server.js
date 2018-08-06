@@ -5,12 +5,10 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser')
 const articlesRoute = require('./routes/articles');
 const productsRoute = require('./routes/products');
-const time = require('express-timestamp');
-const fs = require('fs');
 const logger = require('morgan');
-const path = require('path');
 const PORT = process.env.PORT || 8080;
-const analyticsTracker = require('./middleware/analytics')
+const analyticsTracker = require('./middleware/analytics');
+const checkHeaders = require('./middleware/checkHeaders');
 
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,10 +26,13 @@ logger.token('date', function(){
   return new Date().toISOString()
 })
 
+// app.use(checkHeaders.checkHeader(req,res))
 app.use(logger({format: ":method :url :date[iso]", stream: analyticsTracker.accessLogStream()}))
 
-app.get('/', (req, res, next) => {
+app.get('/' , (req, res, next) => {
+  checkHeaders.checkHeader(req,res)
   res.render('landingPage');
+
 })
 
 app.engine('.hbs', exphbs({

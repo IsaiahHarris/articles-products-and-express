@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const helpers = require('./helpers')
 const payloadValidation = require('../middleware/payloadValidation');
+const checkHeaders = require('../middleware/checkHeaders');
 
-router.get('/', (req, res) => {
+router.get('/',checkHeaders.checkHeader, (req, res) => {
+  
   helpers.getAllArticles(req,res);
 });
 
