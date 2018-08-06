@@ -38,7 +38,6 @@ function validateArticleInfo(req, res, next) {
 };
 
 function validateProductInfo(req, res, next) {
-  console.log(req.body);
   helpers.duplicateProduct(req.body)
     .then(result => {
       if (result.length) {

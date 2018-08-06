@@ -43,7 +43,6 @@ function addAnArticle(req, res) {
     })
 }
 function updateArticle(req, res) {
-  console.log('getting')
   const title = encodeURI(req.params.utitle);
   const data = req.body;
 
@@ -112,7 +111,6 @@ function addProduct(req,res){
 }
 
 function updateProduct(req,res){
-  console.log('second');
   const data = req.body;
   const id = req.params.id;
   return db('products').where('id', '=', id).update({
