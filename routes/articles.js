@@ -5,7 +5,6 @@ const payloadValidation = require('../middleware/payloadValidation');
 const checkHeaders = require('../middleware/checkHeaders');
 
 router.get('/',checkHeaders.checkHeader, (req, res) => {
-  
   helpers.getAllArticles(req,res);
 });
 

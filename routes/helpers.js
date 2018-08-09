@@ -4,7 +4,6 @@ function selectByTitleArticles(req, res) {
   const title = encodeURI(req.params.utitle);
   return db.select().from('articles').where('urltitle', title)
     .then(result => {
-      console.log(result);
       if (!result || !result.length) {
         res.redirect('/articles/new')
       } else {
@@ -14,16 +13,15 @@ function selectByTitleArticles(req, res) {
       }
     })
 }
+
 function selectProducts(id) {
-  return db.select().from('products').where('id', id)
+  return db.select().from('products').where('id', id);
 }
 
 function getAllArticles(req, res) {
   return db.select().from('articles')
-    .then(result => {
-      res.render('home', {
-        articles: result
-      })
+    .then(articles => {
+      res.render('home', { articles })
     })
 }
 
@@ -39,9 +37,11 @@ function addAnArticle(req, res) {
       res.redirect('/articles')
     })
     .catch(err=>{
+      res.send('err')
       console.log(err);
     })
 }
+
 function updateArticle(req, res) {
   const title = encodeURI(req.params.utitle);
   const data = req.body;
@@ -64,6 +64,7 @@ function deleteArticle(req, res) {
   const title = encodeURI(req.params.utitle);
   db.select().from('articles').where('urltitle', title)
     .then(result => {
+      //if result
     return db('articles').where('urltitle', title).del()
   })
     .then(result => {
@@ -79,6 +80,7 @@ function getArticleEditPage(req, res) {
   const title = encodeURI(req.params.utitle);
   db.select().where('title', title).from('articles')
     .then(result => {
+      //if result
       res.render('edit', {
         article: result[0]
       })
@@ -99,11 +101,11 @@ function selectAllProducts(req,res){
 }
 
 function addProduct(req,res){
-  const data = req.body;
+  const { name, price, inventory } = req.body;
   return db('products').insert({
-    name: data.name,
-    price: data.price,
-    inventory: data.inventory,
+    name,
+    price,
+    inventory
   })
     .then(result => {
       res.redirect('/products')
@@ -111,13 +113,15 @@ function addProduct(req,res){
 }
 
 function updateProduct(req,res){
-  const data = req.body;
-  const id = req.params.id;
-  return db('products').where('id', '=', id).update({
-    id: id,
-    name: data.name,
-    price: data.price,
-    inventory: data.inventory,
+  const { id } = req.params;
+  const { name, price, inventory } = req.body;
+  return db('products')
+  .where('id', id)
+  .update({
+    id,
+    name,
+    price,
+    inventory
   })
     .then(result => {
       res.redirect(`/products/${id}`)
@@ -132,7 +136,10 @@ function deleteProduct(req,res){
   const id = req.params.id;
   return db.raw('SELECT * FROM products WHERE id = ?', [id])
     .then(result => {
-      return db('products').where('id', id).del()
+      //if result
+      return db('products')
+      .where('id', id)
+      .del();
     })
     .then(result => {
       res.redirect('/products')
@@ -144,7 +151,9 @@ function deleteProduct(req,res){
 }
 function getProductById(req,res){
   const id = req.params.id;
-  return db.select().from('products').where('id', id)
+  return db.select()
+  .from('products')
+  .where('id', id)
     .then(result => {
       if (!result || !result.length) {
         res.redirect('/products/new')

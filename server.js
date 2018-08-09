@@ -6,9 +6,9 @@ const bodyParser = require('body-parser')
 const articlesRoute = require('./routes/articles');
 const productsRoute = require('./routes/products');
 const logger = require('morgan');
-const PORT = process.env.PORT || 8080;
 const analyticsTracker = require('./middleware/analytics');
 const checkHeaders = require('./middleware/checkHeaders');
+const PORT = process.env.PORT || 8080;
 
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({ extended: true }));
